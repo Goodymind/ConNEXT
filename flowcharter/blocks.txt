@@ -1,0 +1,17 @@
+PROGRESS
+def - done
+if - done
+else - done
+class - skip // irrelevant
+switch
+for
+while
+try
+except
+finally
+return - done
+break - done
+continue
+yield - done
+pass - done
+

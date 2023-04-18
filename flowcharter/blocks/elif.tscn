@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgpbwk6glujyw"]
+
+[ext_resource type="Script" path="res://flowcharter/blocks/Elif.cs" id="1_0ty3w"]
+
+[node name="Elif" type="Node2D"]
+script = ExtResource("1_0ty3w")

@@ -1,0 +1,93 @@
+[gd_scene load_steps=6 format=3 uid="uid://mvlfdalvknuq"]
+
+[ext_resource type="Script" path="res://Main.cs" id="1_bvngn"]
+[ext_resource type="FontFile" uid="uid://b2enrf6dr31fh" path="res://assets/font/seguisb.ttf" id="2_cmcwd"]
+[ext_resource type="FontFile" uid="uid://ch75idprlwjlr" path="res://assets/font/segoeuib.ttf" id="3_3emf6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cv5ky"]
+bg_color = Color(0.0980392, 0.509804, 0.768627, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Theme" id="Theme_q3fi6"]
+default_font = ExtResource("2_cmcwd")
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/styles/normal = SubResource("StyleBoxFlat_cv5ky")
+Label/colors/font_color = Color(0, 0, 0, 1)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_bvngn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_q3fi6")
+
+[node name="VSplitContainer" type="VSplitContainer" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 83.0
+offset_top = -90.0
+offset_right = 576.0
+offset_bottom = 113.0
+grow_vertical = 2
+dragger_visibility = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/VSplitContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_3emf6")
+theme_override_font_sizes/font_size = 89
+text = "ConNEXT"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Select" type="Button" parent="CanvasLayer/UI/VSplitContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 6
+text = "Select a File"
+
+[node name="Help" type="Button" parent="CanvasLayer/UI/VSplitContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 6
+text = "Help"
+
+[node name="Options" type="Button" parent="CanvasLayer/UI/VSplitContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 6
+text = "Options"
+
+[node name="Left" type="Button" parent="."]
+visible = false
+offset_left = 204.0
+offset_top = 276.0
+offset_right = 538.0
+offset_bottom = 391.0
+theme_override_font_sizes/font_size = 78
+text = "left"
+
+[node name="Right" type="Button" parent="."]
+visible = false
+offset_left = 707.0
+offset_top = 276.0
+offset_right = 1041.0
+offset_bottom = 391.0
+theme_override_font_sizes/font_size = 78
+text = "right"

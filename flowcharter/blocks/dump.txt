@@ -1,0 +1,13 @@
+E 0:00:15:0129   :0 @ System.Object System.Runtime.CompilerServices.CastHelpers.ChkCastAny(System.Void* , System.Object ): System.InvalidCastException: Unable to cast object of type 'Flowcharter.flowcharter.blocks.Else' to type 'Flowcharter.flowcharter.blocks.Elif'.
+  <C++ Error>    System.InvalidCastException
+  <C++ Source>   :0 @ System.Object System.Runtime.CompilerServices.CastHelpers.ChkCastAny(System.Void* , System.Object )
+  <Stack Trace>  :0 @ System.Object System.Runtime.CompilerServices.CastHelpers.ChkCastAny(System.Void* , System.Object )
+                 PackedSceneExtensions.cs:20 @ T Godot.PackedScene.Instantiate<T >(Godot.PackedScene+GenEditState )
+                 FlowchartGenerator.cs:69 @ void Flowcharter.flowcharter.FlowchartGenerator.Analyze(System.String , Int32 )
+                 FlowchartGenerator.cs:33 @ void Flowcharter.flowcharter.FlowchartGenerator.Start()
+                 FlowchartGenerator.cs:21 @ void Flowcharter.flowcharter.FlowchartGenerator._Ready()
+                 Node.cs:1782 @ Boolean Godot.Node.InvokeGodotClassMethod(Godot.NativeInterop.godot_string_name& , Godot.NativeInterop.NativeVariantPtrArgs , Godot.NativeInterop.godot_variant& )
+                 CanvasItem.cs:1370 @ Boolean Godot.CanvasItem.InvokeGodotClassMethod(Godot.NativeInterop.godot_string_name& , Godot.NativeInterop.NativeVariantPtrArgs , Godot.NativeInterop.godot_variant& )
+                 Node2D.cs:516 @ Boolean Godot.Node2D.InvokeGodotClassMethod(Godot.NativeInterop.godot_string_name& , Godot.NativeInterop.NativeVariantPtrArgs , Godot.NativeInterop.godot_variant& )
+                 Flowcharter.flowcharter.FlowchartGenerator_ScriptMethods.generated.cs:54 @ Boolean Flowcharter.flowcharter.FlowchartGenerator.InvokeGodotClassMethod(Godot.NativeInterop.godot_string_name& , Godot.NativeInterop.NativeVariantPtrArgs , Godot.NativeInterop.godot_variant& )
+                 CSharpInstanceBridge.cs:24 @ Godot.NativeInterop.godot_bool Godot.Bridge.CSharpInstanceBridge.Call(IntPtr , Godot.NativeInterop.godot_string_name* , Godot.NativeInterop.godot_variant** , Int32 , Godot.NativeInterop.godot_variant_call_error* , Godot.NativeInterop.godot_variant* )

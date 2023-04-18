@@ -1,0 +1,10 @@
+E 0:00:14:0634   :0 @ System.Object System.Runtime.CompilerServices.CastHelpers.ChkCastAny(System.Void* , System.Object ): System.InvalidCastException: Unable to cast object of type 'Flowcharter.flowcharter.NewFlowchartGenerator' to type 'Flowcharter.flowcharter.NewBlock'.
+  <C++ Error>    System.InvalidCastException
+  <C++ Source>   :0 @ System.Object System.Runtime.CompilerServices.CastHelpers.ChkCastAny(System.Void* , System.Object )
+  <Stack Trace>  :0 @ System.Object System.Runtime.CompilerServices.CastHelpers.ChkCastAny(System.Void* , System.Object )
+                 NodeExtensions.cs:182 @ T Godot.Node.GetParent<T >()
+                 NewBlock.cs:85 @ void Flowcharter.flowcharter.NewBlock.FlowModified()
+                 NewBlock.cs:60 @ void Flowcharter.flowcharter.NewBlock.NewBlockEntered(Flowcharter.flowcharter.NewBlock )
+                 NewBlock.cs:39 @ void Flowcharter.flowcharter.NewBlock.ChildEntered(Godot.Node )
+                 Node.cs:1638 @ void Godot.Node.ChildEnteredTreeTrampoline(System.Object , Godot.NativeInterop.NativeVariantPtrArgs , Godot.NativeInterop.godot_variant& )
+                 DelegateUtils.cs:47 @ void Godot.DelegateUtils.InvokeWithVariantArgs(IntPtr , System.Void* , Godot.NativeInterop.godot_variant** , Int32 , Godot.NativeInterop.godot_variant* )

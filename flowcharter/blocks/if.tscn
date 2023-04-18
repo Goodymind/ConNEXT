@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://1xsyly45xbni"]
+
+[ext_resource type="Script" path="res://flowcharter/blocks/If.cs" id="1_aoofv"]
+
+[node name="If" type="Node2D"]
+script = ExtResource("1_aoofv")

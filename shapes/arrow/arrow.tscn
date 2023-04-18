@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bd7lsrb45fhk3"]
+
+[ext_resource type="Texture2D" uid="uid://dyab5i2tlbhm7" path="res://shapes/arrow/sprite_0.png" id="1_cro0o"]
+[ext_resource type="Script" path="res://shapes/arrow/Arrow.cs" id="2_74ik3"]
+[ext_resource type="Texture2D" uid="uid://ctuuonsjwlsah" path="res://shapes/arrow/sprite_1.png" id="2_coro7"]
+
+[node name="Arrow" type="Sprite2D"]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("1_cro0o")
+region_enabled = true
+region_rect = Rect2(0, 0, 48, 48)
+script = ExtResource("2_74ik3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 2
+texture = ExtResource("2_coro7")
+centered = false
+offset = Vector2(-24, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 48, 48)

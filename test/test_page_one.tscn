@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://j4x4jis7wm36"]
+
+[ext_resource type="Script" path="res://test/TestPageOne.cs" id="1_0sq0y"]
+
+[node name="TestPageOne" type="Node2D"]
+script = ExtResource("1_0sq0y")
+
+[node name="Main" type="Button" parent="."]
+offset_left = 204.0
+offset_top = 276.0
+offset_right = 538.0
+offset_bottom = 391.0
+theme_override_font_sizes/font_size = 78
+text = "main"
+
+[node name="Right" type="Button" parent="."]
+offset_left = 707.0
+offset_top = 276.0
+offset_right = 1041.0
+offset_bottom = 391.0
+theme_override_font_sizes/font_size = 78
+text = "right"

@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://bgeu7ls0dl538"]
+
+[ext_resource type="FontFile" uid="uid://b2enrf6dr31fh" path="res://assets/font/seguisb.ttf" id="1_dlcwm"]
+[ext_resource type="Script" path="res://flowcharter/EnvironmentUI.cs" id="2_n3mi1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l36ie"]
+bg_color = Color(0.168627, 0.168627, 0.168627, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2vpby"]
+bg_color = Color(0.14902, 0.121569, 0, 1)
+
+[sub_resource type="Theme" id="Theme_758em"]
+default_font = ExtResource("1_dlcwm")
+default_font_size = 12
+ItemList/styles/focus = SubResource("StyleBoxFlat_l36ie")
+ItemList/styles/panel = SubResource("StyleBoxFlat_l36ie")
+ItemList/styles/selected = SubResource("StyleBoxFlat_l36ie")
+ItemList/styles/selected_focus = SubResource("StyleBoxFlat_l36ie")
+Label/styles/normal = SubResource("StyleBoxFlat_2vpby")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 350.0
+grow_vertical = 2
+theme = SubResource("Theme_758em")
+script = ExtResource("2_n3mi1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FileDialog" type="FileDialog" parent="VBoxContainer"]
+title = "Open a File or Directory"
+position = Vector2i(41, 62)
+size = Vector2i(1000, 500)
+ok_button_text = "Open"
+file_mode = 3
+access = 2
+root_subfolder = "C:/Users/Alinus/Downloads/"
+filters = PackedStringArray("py")
+show_hidden_files = true
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Functions"
+
+[node name="ItemList" type="ItemList" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+item_count = 2
+item_0/text = "test one"
+item_1/text = "test two"
+
+[connection signal="item_selected" from="VBoxContainer/ItemList" to="." method="ItemListSelected"]

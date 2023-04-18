@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://de81x0tltl0j3"]
+
+[ext_resource type="Script" path="res://flowcharter/FlowchartGenerator.cs" id="1_fqhq5"]
+[ext_resource type="PackedScene" uid="uid://bgeu7ls0dl538" path="res://flowcharter/environment_ui.tscn" id="2_4c6so"]
+[ext_resource type="Script" path="res://utils/EnvironmentCamera.cs" id="2_lf5d3"]
+
+[node name="FlowchartEnvironment" type="Node2D"]
+script = ExtResource("1_fqhq5")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" parent="CanvasLayer" instance=ExtResource("2_4c6so")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 20.0
+script = ExtResource("2_lf5d3")
+
+[node name="Functions" type="Node2D" parent="."]
