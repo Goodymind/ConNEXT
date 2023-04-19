@@ -1,24 +1,20 @@
-def FunctionOne():
-    print('function one')
-    print('function one')
-    print('function one')
-    print('function one')
-    print('function one')
-    if True:
-        print('True')
-        print('True')
-        print('True')
-        print('True')
-        print('True')
-    elif True:
-        print('elif')
-        print('elif')
-        print('elif')
-        print('elif')
-        print('elif')
-    else:
-        print('Else')
-        print('Else')
-        print('Else')
-        print('Else')
-    print('Then')
+if True:
+    print('OHHHH')
+    print('OHHHH')
+    print('OHHHH')
+    print('OHHHH')
+    print('OHHHH')
+    print('OHHHH')
+elif False:
+    print('NAHHHHHHHH')
+    print('NAHHHHHHHH')
+    print('NAHHHHHHHH')
+    print('NAHHHHHHHH')
+    print('NAHHHHHHHH')
+else:
+    print('fuck')
+while True:
+    print('one')
+    print('two')
+    print('five')
+    print('six')

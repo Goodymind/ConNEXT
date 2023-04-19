@@ -11,7 +11,7 @@ public partial class Else : Block
         {
             if (f is NewShape shape)
             {
-                shape.Position = new Vector2I(0, 96 * v);
+                shape.Position = new Vector2I(0, UniversalShapeHeight * v);
                 v += 1;
             }
             if (f is Block block)
@@ -19,7 +19,7 @@ public partial class Else : Block
                 if (block.Seperate)
                     continue;
                 block.Update();
-                block.Position = new Vector2I(0, 96 * v);
+                block.Position = new Vector2I(0, UniversalShapeHeight * v);
                 int h = block.Height;
                 v += h;
             }

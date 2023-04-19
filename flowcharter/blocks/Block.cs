@@ -6,6 +6,8 @@ using Flowcharter.shapes;
 namespace Flowcharter.flowcharter.blocks;
 public partial class Block : Node2D
 {
+    public int UniversalShapeWidth = 160;
+    public int UniversalShapeHeight = 120;
     public bool Seperate;
     public int LeadingSpaces;
     public int Width
@@ -36,7 +38,7 @@ public partial class Block : Node2D
                     }
                 }
             }
-            return (int)(farthestX - GlobalPosition.X) / 128 + 1;
+            return (int)(farthestX - GlobalPosition.X) / UniversalShapeWidth + 1;
         }
     }
     public int Height
@@ -65,9 +67,9 @@ public partial class Block : Node2D
                         unVisited.Push(child);
                 }
             }
-            //GD.PrintT(Name, "Width called", (farthestX - GlobalPosition.X) / 128 + 1, farthestX, GlobalPosition);
+            //GD.PrintT(Name, "Width called", (farthestX - GlobalPosition.X) / UniversalShapeWidth + 1, farthestX, GlobalPosition);
 
-            return (int)(farthestX - GlobalPosition.Y) / 96 + 1;
+            return (int)(farthestX - GlobalPosition.Y) / UniversalShapeHeight + 1;
         }
     }
     public List<Node2D> Children => GetChildren().OfType<Node2D>().ToList();

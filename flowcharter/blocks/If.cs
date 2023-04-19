@@ -21,7 +21,7 @@ public partial class If : Block
         {
             if (c is NewShape shape)
             {
-                c.Position = new Vector2I(128 * i, 96 * height);
+                c.Position = new Vector2I(UniversalShapeWidth * i, UniversalShapeHeight * height);
                 i += 1;
             }
             if (c is Block block)
@@ -32,14 +32,14 @@ public partial class If : Block
                 if (block is If)
                 {
                     height += block.Height;
-                    block.Position = new Vector2I(128 * i, 96 * height);
+                    block.Position = new Vector2I(UniversalShapeWidth * i, UniversalShapeHeight * height);
                     i += block.Width;
                     prevIfWidth= block.Width;
                     height += block.Height;
                 }
                 if (block is Else)
                 {
-                    block.Position = new Vector2I(128 * (i-prevIfWidth), 96 * height);
+                    block.Position = new Vector2I(UniversalShapeWidth * (i-prevIfWidth), UniversalShapeHeight * height);
                     height += block.Height;
                 }
             }

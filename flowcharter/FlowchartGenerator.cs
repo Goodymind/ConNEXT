@@ -13,6 +13,7 @@ public partial class FlowchartGenerator : Node2D
     static PackedScene ifScene = GD.Load<PackedScene>("res://flowcharter/blocks/if.tscn");
     static PackedScene elseScene = GD.Load<PackedScene>("res://flowcharter/blocks/else.tscn");
     static PackedScene elifScene = GD.Load<PackedScene>("res://flowcharter/blocks/elif.tscn");
+    static PackedScene whileScene = GD.Load<PackedScene>("res://flowcharter/blocks/while.tscn");
     List<string> FileLines;
     List<Function> Functions = new List<Function>();
     EnvironmentUI UI;
@@ -57,18 +58,20 @@ public partial class FlowchartGenerator : Node2D
                 block = functionScene.Instantiate<Function>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
                 Functions.Add(block as Function);
             }
-            if (trimmed.Substring(0, 3) == "if ")
+            else if (trimmed.Substring(0, 3) == "if ")
             {
                 block = ifScene.Instantiate<If>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
             }
-            if (trimmed.Substring(0,5) == "else:" || trimmed.Substring(0,5) == "else ")
+            else if (trimmed.Substring(0,5) == "else:" || trimmed.Substring(0,5) == "else ")
             {
                 block = elseScene.Instantiate<Else>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
             }
-            if (trimmed.Substring(0,5) == "elif ")
+            else if (trimmed.Substring(0,5) == "elif ")
             {
                 block = elifScene.Instantiate<Elif>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
             }
+            else if (trimmed.Substring(0,6) == "while ")
+                block = elifScene.Instantiate<Elif>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
             MostRecentParent.AddChild(block);
             MostRecentParent = block;
             return;

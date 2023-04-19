@@ -20,7 +20,7 @@ public partial class Function: Block
         {
             if (f is NewShape shape)
             {
-                shape.Position = new Vector2I(128 * ( prevIfWidth == 0 ? (Width - 1): Width), 96 * v);
+                shape.Position = new Vector2I(UniversalShapeWidth * ( prevIfWidth == 0 ? (Width - 1): Width), UniversalShapeHeight * v);
                 v += 1;
                 prevIfWidth = 0;
             }
@@ -30,19 +30,25 @@ public partial class Function: Block
                     continue;
                 if (block is If)
                 {
-                    block.Position = new Vector2I(128 * (Width - 1), 96 * v);
+                    block.Position = new Vector2I(UniversalShapeWidth * (Width - 1), UniversalShapeHeight * v);
                     block.Update();
                     prevIfWidth = block.Width;
                 }
                 if (block is Else)
                 {
-                    block.Position = new Vector2I(128 * (Width - prevIfWidth), 96 * v);
+                    block.Position = new Vector2I(UniversalShapeWidth * (Width - prevIfWidth), UniversalShapeHeight * v);
                     block.Update();
                     prevIfWidth = Math.Max(prevIfWidth, block.Width);
                 }
                 if (block is Elif)
                 {
-                    block.Position = new Vector2I(128 * (Width - prevIfWidth), 96 * v);
+                    block.Position = new Vector2I(UniversalShapeWidth * (Width - prevIfWidth), UniversalShapeHeight * v);
+                    block.Update();
+                    prevIfWidth = Math.Max(prevIfWidth, block.Width);
+                }
+                if (block is While)
+                {
+                    block.Position = new Vector2I(UniversalShapeWidth * (Width - prevIfWidth), UniversalShapeHeight * v);
                     block.Update();
                     prevIfWidth = Math.Max(prevIfWidth, block.Width);
                 }

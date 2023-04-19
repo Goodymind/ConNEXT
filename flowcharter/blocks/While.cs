@@ -1,17 +1,11 @@
 using Godot;
 using Flowcharter.shapes;
 namespace Flowcharter.flowcharter.blocks;
-
-public partial class Elif : Block
+public partial class While : Block
 {
-    public Elif()
-    {
-        Seperate = false;
-    }
-    public override void _Ready()
-    {
+    public While() => Seperate = false;
+    public override void _Ready() =>
         AddChild(FlowchartGenerator.shapeScene.Instantiate<NewShape>().Init(Name, Name, NewShape.Shapes.DECISION));
-    }
     public override void Update()
     {
         int i = 0;
@@ -34,15 +28,17 @@ public partial class Elif : Block
                     height += block.Height;
                     block.Position = new Vector2I(UniversalShapeWidth * i, UniversalShapeHeight * height);
                     i += block.Width;
-                    prevIfWidth= block.Width;
+                    prevIfWidth = block.Width;
                     height += block.Height;
                 }
                 if (block is Else)
                 {
-                    block.Position = new Vector2I(UniversalShapeWidth * (i-prevIfWidth), UniversalShapeHeight * height);
+                    block.Position = new Vector2I(UniversalShapeWidth * (i - prevIfWidth), UniversalShapeHeight * height);
                     height += block.Height;
                 }
             }
         }
     }
+
+
 }

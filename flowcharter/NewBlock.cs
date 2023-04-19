@@ -32,7 +32,7 @@ public partial class NewBlock : Node2D
                     }
                 }
             }
-            return (int)(farthestY - GlobalPosition.Y) / 96 + 1;
+            return (int)(farthestY - GlobalPosition.Y) / UniversalShapeHeight + 1;
         }
     }
     public int Width
@@ -63,11 +63,12 @@ public partial class NewBlock : Node2D
                     }
                 }
             }
-            //GD.PrintT(Name, "Width called", (farthestX - GlobalPosition.X) / 128 + 1, farthestX, GlobalPosition);
-            return (int)(farthestX - GlobalPosition.X) / 128 + 1;
+            //GD.PrintT(Name, "Width called", (farthestX - GlobalPosition.X) / 160 + 1, farthestX, GlobalPosition);
+            return (int)(farthestX - GlobalPosition.X) / 160 + 1;
         }
     }
-
+    public int UniversalShapeWidth = 160;
+    public int UniversalShapeHeight = 120;
     public bool Seperate = true;
     public List<NewBlock> InsideBlocks = new List<NewBlock>();
     public List<NewBlock> SeperateBlocks = new List<NewBlock>();
@@ -102,7 +103,7 @@ public partial class NewBlock : Node2D
         {
             if (f is Shape shape)
             {
-                shape.Position = new Vector2I(128 * savedW, 96 * v);
+                shape.Position = new Vector2I(160 * savedW, UniversalShapeHeight * v);
                 prevW = 0;
                 v++;
             }
@@ -112,7 +113,7 @@ public partial class NewBlock : Node2D
                     return;
                 if (block.Type == BlockType.WHILE)
                     v++;
-                block.Position = new Vector2I(128 * (savedW-prevW), 96 * v);
+                block.Position = new Vector2I(160 * (savedW-prevW), UniversalShapeHeight * v);
                 block.Update();
                 savedW = Width;
                 prevW = block.Width;
@@ -130,9 +131,9 @@ public partial class NewBlock : Node2D
             if (f is Shape shape)
             {
                 if (Type == BlockType.IF)
-                    shape.Position = new Vector2I(128 * h, 96 * (Height - 1));
+                    shape.Position = new Vector2I(160 * h, UniversalShapeHeight * (Height - 1));
                 if (Type == BlockType.ELSE)
-                    shape.Position = new Vector2(128 * (Width - 1), 96 * h);
+                    shape.Position = new Vector2(160 * (Width - 1), UniversalShapeHeight * h);
                 h++;
                 previousWidth = 1;
             }
@@ -148,12 +149,12 @@ public partial class NewBlock : Node2D
                 {
                     if (block.Type == BlockType.IF)
                     {
-                        block.Position = new Vector2I(128 * h, 0);
+                        block.Position = new Vector2I(160 * h, 0);
                         h += block.Width;
                     }
                     if (block.Type == BlockType.ELSE)
                     {
-                        block.Position = new Vector2I(128 * (h - previousWidth), 96);
+                        block.Position = new Vector2I(160 * (h - previousWidth), UniversalShapeHeight);
                         h += -previousWidth + block.Width;
                     }
                     previousWidth = block.Width;
@@ -161,7 +162,7 @@ public partial class NewBlock : Node2D
                 //when the paret is an else
                 if (Type == BlockType.ELSE)
                 {
-                    block.Position = new Vector2I(0, 96 * h);
+                    block.Position = new Vector2I(0, UniversalShapeHeight * h);
                     h += block.Height;
                 }
             }
