@@ -26,7 +26,7 @@ public partial class NewBlock : Node2D
                         farthestY = Math.Max(farthestY, (int)shape.GlobalPosition.Y);
                     if (child is NewBlock block)
                     {
-                        if (block.Seperate)
+                        if (block.Separate)
                             continue;
                         unVisited.Push(block);
                     }
@@ -57,7 +57,7 @@ public partial class NewBlock : Node2D
                     }
                     if (child is NewBlock block)
                     {
-                        if (block.Seperate)
+                        if (block.Separate)
                             continue;
                         unVisited.Push(block);
                     }
@@ -69,9 +69,9 @@ public partial class NewBlock : Node2D
     }
     public int UniversalShapeWidth = 160;
     public int UniversalShapeHeight = 120;
-    public bool Seperate = true;
+    public bool Separate = true;
     public List<NewBlock> InsideBlocks = new List<NewBlock>();
-    public List<NewBlock> SeperateBlocks = new List<NewBlock>();
+    public List<NewBlock> SeparateBlocks = new List<NewBlock>();
     public List<Node2D> Children
     {
         get
@@ -86,15 +86,15 @@ public partial class NewBlock : Node2D
         this.Type = type;
         if (type == BlockType.DEF)
         {
-            Seperate = true;
+            Separate = true;
         }
         else
-            Seperate = false;
+            Separate = false;
         return this;
     }
 
     //for functions only
-    public void UpdateSeperate()
+    public void UpdateSeparate()
     {
         int v = 0;
         int savedW = 0;
@@ -109,7 +109,7 @@ public partial class NewBlock : Node2D
             }
             if (f is NewBlock block)
             {
-                if (block.Seperate)
+                if (block.Separate)
                     return;
                 if (block.Type == BlockType.WHILE)
                     v++;
@@ -140,7 +140,7 @@ public partial class NewBlock : Node2D
             //if the child is a newblock
             if (f is NewBlock block)
             {
-                if (block.Seperate)
+                if (block.Separate)
                     return;
                 block.Update();
 

@@ -3,7 +3,7 @@ using Flowcharter.shapes;
 namespace Flowcharter.flowcharter.blocks;
 public partial class Else : Block
 {
-    public Else() => Seperate = false;
+    public Else() => Separate = false;
     public override void Update()
     {
         int v = 0;
@@ -16,7 +16,7 @@ public partial class Else : Block
             }
             if (f is Block block)
             {
-                if (block.Seperate)
+                if (block.Separate)
                     continue;
                 block.Update();
                 block.Position = new Vector2I(0, UniversalShapeHeight * v);

@@ -34,7 +34,7 @@ public partial class FlowchartGenerator : Node2D
                 continue;
             Analyze(FileLines[i], i);
         }
-        SeperateFunctions();
+        SeparateFunctions();
         UI.Update(Functions);
     }
     private void Read(string path)
@@ -71,14 +71,14 @@ public partial class FlowchartGenerator : Node2D
                 block = elifScene.Instantiate<Elif>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
             }
             else if (trimmed.Substring(0,6) == "while ")
-                block = elifScene.Instantiate<Elif>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
+                block = whileScene.Instantiate<While>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
             MostRecentParent.AddChild(block);
             MostRecentParent = block;
             return;
         }
         MostRecentParent.AddChild(shapeScene.Instantiate<NewShape>().Init(trimmed, trimmed, NewShape.Shapes.PROCESS));
     }
-    private void SeperateFunctions()
+    private void SeparateFunctions()
     {
         foreach (var f in Functions)
             f.Reparent(GetNode("Functions"), false);

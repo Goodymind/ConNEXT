@@ -6,11 +6,11 @@ public partial class Elif : Block
 {
     public Elif()
     {
-        Seperate = false;
+        Separate = false;
     }
     public override void _Ready()
     {
-        AddChild(FlowchartGenerator.shapeScene.Instantiate<NewShape>().Init(Name, Name, NewShape.Shapes.DECISION));
+        AddChild(FlowchartGenerator.shapeScene.Instantiate<NewShape>().Init(Name, Line, NewShape.Shapes.DECISION));
     }
     public override void Update()
     {
@@ -26,7 +26,7 @@ public partial class Elif : Block
             }
             if (c is Block block)
             {
-                if (block.Seperate)
+                if (block.Separate)
                     continue;
                 block.Update();
                 if (block is If)

@@ -108,7 +108,7 @@ public partial class NewFlowchartGenerator : Node2D
         }
         foreach (var f in Functions)
         {
-            f.UpdateSeperate();
+            f.UpdateSeparate();
         }
     }
 

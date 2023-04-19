@@ -6,11 +6,11 @@ public partial class Function: Block
 {
     public Function()
     {
-        Seperate = true;
+        Separate = true;
     }
     public override void _Ready()
     {
-        AddChild(FlowchartGenerator.shapeScene.Instantiate<NewShape>().Init(Name, Name, NewShape.Shapes.TERMINATOR));
+        AddChild(FlowchartGenerator.shapeScene.Instantiate<NewShape>().Init(Name, Line, NewShape.Shapes.TERMINATOR));
     }
     public override void Update()
     {
@@ -26,11 +26,11 @@ public partial class Function: Block
             }
             if (f is Block block)
             {
-                if (block.Seperate)
+                if (block.Separate)
                     continue;
                 if (block is If)
                 {
-                    block.Position = new Vector2I(UniversalShapeWidth * (Width - 1), UniversalShapeHeight * v);
+                    block.Position = new Vector2I(UniversalShapeWidth * (prevIfWidth == 0? Width - 1: Width), UniversalShapeHeight * v);
                     block.Update();
                     prevIfWidth = block.Width;
                 }
@@ -48,14 +48,14 @@ public partial class Function: Block
                 }
                 if (block is While)
                 {
-                    block.Position = new Vector2I(UniversalShapeWidth * (Width - prevIfWidth), UniversalShapeHeight * v);
+                    v += 1;
+                    block.Position = new Vector2I(UniversalShapeWidth * (Width - Math.Max(1,prevIfWidth)), UniversalShapeHeight * v);
                     block.Update();
                     prevIfWidth = Math.Max(prevIfWidth, block.Width);
                 }
                 block.Update();
                 v += block.Height;
             }
-            //GD.PrintT(Name, v, f.Name);
         }
     }
 }

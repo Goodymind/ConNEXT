@@ -8,8 +8,9 @@ public partial class Block : Node2D
 {
     public int UniversalShapeWidth = 160;
     public int UniversalShapeHeight = 120;
-    public bool Seperate;
+    public bool Separate;
     public int LeadingSpaces;
+    public string Line;
     public int Width
     {
         get
@@ -30,7 +31,7 @@ public partial class Block : Node2D
                 }
                 else if (currentNode is Block block)
                 {
-                    if (block.Seperate)
+                    if (block.Separate)
                         continue;
                     foreach (var child in block.Children)
                     {
@@ -61,7 +62,7 @@ public partial class Block : Node2D
                 }
                 else if (currentNode is Block block)
                 {
-                    if (block.Seperate)
+                    if (block.Separate)
                         continue;
                     foreach (var child in block.Children)
                         unVisited.Push(child);
@@ -78,6 +79,7 @@ public partial class Block : Node2D
     {
         this.LeadingSpaces = leadingSpaces;
         this.Name = name;
+        this.Line = name;
         return this;
     }
 

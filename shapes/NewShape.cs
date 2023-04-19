@@ -18,6 +18,7 @@ public partial class NewShape : Sprite2D
         this.shape = shape;
         Name = name;
         this.line = line;
+        //GD.PrintT(line);
         return this;
     }
     public override void _Ready()

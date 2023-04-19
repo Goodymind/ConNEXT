@@ -1,20 +1,30 @@
 if True:
-    print('OHHHH')
-    print('OHHHH')
-    print('OHHHH')
-    print('OHHHH')
-    print('OHHHH')
-    print('OHHHH')
-elif False:
-    print('NAHHHHHHHH')
-    print('NAHHHHHHHH')
-    print('NAHHHHHHHH')
-    print('NAHHHHHHHH')
-    print('NAHHHHHHHH')
-else:
-    print('fuck')
-while True:
-    print('one')
-    print('two')
-    print('five')
-    print('six')
+    print('start')
+    if True:
+        print('if')
+    elif True:
+        print('elif')
+        print('elif')
+    else:
+        print('else')
+        print('else')
+        print('else')
+    print('okay')
+    print('call me maybe?')
+    print('call me maybe?')
+    print('call me maybe?')
+    if True:
+        if True:
+            if True:
+                print('okay!!')
+            else:
+                print('Nooo')
+        else:
+            print('shooo')
+    else:
+        print('saddd')
+    print('i love you so much!!')
+    print('i love you so much!!')
+    print('i love you so much!!')
+    print('i love you so much!!')
+    print('i love you so much!!')
