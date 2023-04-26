@@ -23,6 +23,7 @@ public partial class If : Block
         {
             if (c is NewShape shape)
             {
+                height += prevHeight == 0? 0: 1;
                 c.Position = new Vector2I(UniversalShapeWidth * i, UniversalShapeHeight * height);
                 i += 1;
                 prevHeight = 0;
@@ -32,28 +33,29 @@ public partial class If : Block
                 if (block.Separate)
                     continue;
                 block.Update();
-                //GD.PrintT(GetPath(), i, block.Name);
-                if (block is If)
+                if (block is If || block is While)
                 {
-                    height += Math.Max(prevHeight, 1);
+                    height += 1;
                     block.Position = new Vector2I(UniversalShapeWidth * i, UniversalShapeHeight * height);
                     prevI = i;
                     i += block.Width;
+                    height += block.Height-1;
                     prevHeight = block.Height;
-                    height += block.Height;
                 }
                 if (block is Elif)
                 {
+                    height += 1;
                     block.Position = new Vector2I(UniversalShapeWidth * (prevI), UniversalShapeHeight * height);
-                    height += block.Height;
-                    prevHeight += block.Height;
+                    height += block.Height-1;
+                    prevHeight = block.Height;
                     i = Math.Max(i, prevI + block.Width);
                 }
                 if (block is Else)
                 {
+                    height += 1;
                     block.Position = new Vector2I(UniversalShapeWidth * (prevI), UniversalShapeHeight * height);
-                    height += block.Height;
-                    prevHeight += block.Height;
+                    height += block.Height-1;
+                    prevHeight = block.Height;
                     i = Math.Max(i, prevI + block.Width);
                 }
             }

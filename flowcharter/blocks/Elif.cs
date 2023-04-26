@@ -29,7 +29,7 @@ public partial class Elif : Block
                 if (block.Separate)
                     continue;
                 block.Update();
-                if (block is If)
+                if (block is If || block is While)
                 {
                     height += block.Height;
                     block.Position = new Vector2I(UniversalShapeWidth * i, UniversalShapeHeight * height);
