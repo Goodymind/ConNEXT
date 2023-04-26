@@ -5,18 +5,26 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l36ie"]
 bg_color = Color(0.168627, 0.168627, 0.168627, 1)
+border_width_left = 30
+border_color = Color(0.168627, 0.168627, 0.168627, 1)
+corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2vpby"]
-bg_color = Color(0.14902, 0.121569, 0, 1)
+bg_color = Color(0.168627, 0.168627, 0.168627, 1)
 
 [sub_resource type="Theme" id="Theme_758em"]
 default_font = ExtResource("1_dlcwm")
 default_font_size = 12
+ItemList/colors/font_color = Color(0.541176, 0.541176, 0.541176, 1)
+ItemList/colors/font_selected_color = Color(0.972549, 0.972549, 0.972549, 1)
+ItemList/colors/guide_color = Color(0.168627, 0.168627, 0.168627, 1)
+ItemList/constants/v_separation = 6
 ItemList/styles/focus = SubResource("StyleBoxFlat_l36ie")
 ItemList/styles/panel = SubResource("StyleBoxFlat_l36ie")
 ItemList/styles/selected = SubResource("StyleBoxFlat_l36ie")
 ItemList/styles/selected_focus = SubResource("StyleBoxFlat_l36ie")
 Label/styles/normal = SubResource("StyleBoxFlat_2vpby")
+VBoxContainer/constants/separation = -1
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -46,9 +54,11 @@ root_subfolder = "C:/Users/Alinus/Downloads/"
 filters = PackedStringArray("py")
 show_hidden_files = true
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Functions" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 36
 text = "Functions"
+horizontal_alignment = 1
 
 [node name="ItemList" type="ItemList" parent="VBoxContainer"]
 layout_mode = 2
@@ -57,4 +67,15 @@ item_count = 2
 item_0/text = "test one"
 item_1/text = "test two"
 
+[node name="Classes" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Classes"
+horizontal_alignment = 1
+
+[node name="ClassList" type="ItemList" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
 [connection signal="item_selected" from="VBoxContainer/ItemList" to="." method="ItemListSelected"]
+[connection signal="item_selected" from="VBoxContainer/ClassList" to="." method="ItemListSelected"]

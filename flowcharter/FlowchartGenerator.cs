@@ -14,8 +14,11 @@ public partial class FlowchartGenerator : Node2D
     static PackedScene elseScene = GD.Load<PackedScene>("res://flowcharter/blocks/else.tscn");
     static PackedScene elifScene = GD.Load<PackedScene>("res://flowcharter/blocks/elif.tscn");
     static PackedScene whileScene = GD.Load<PackedScene>("res://flowcharter/blocks/while.tscn");
+    static PackedScene forScene = GD.Load<PackedScene>("res://flowcharter/blocks/for.tscn");
+    static PackedScene classScene = GD.Load<PackedScene>("res://flowcharter/blocks/class.tscn");
     List<string> FileLines;
     List<Function> Functions = new List<Function>();
+    List<Class> Classes = new List<Class>();
     EnvironmentUI UI;
     public override void _Ready()
     {
@@ -35,7 +38,7 @@ public partial class FlowchartGenerator : Node2D
             Analyze(FileLines[i], i);
         }
         SeparateFunctions();
-        UI.Update(Functions);
+        UI.Update(Functions, Classes);
     }
     private void Read(string path)
     {
@@ -56,11 +59,22 @@ public partial class FlowchartGenerator : Node2D
             if (trimmed.Substring(0, 4) == "def ")
             {
                 block = functionScene.Instantiate<Function>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
-                Functions.Add(block as Function);
+                if (!Functions.Contains(block as Function))
+                    Functions.Add(block as Function);
+            }
+            if (trimmed.Substring(0, 4) == "class ")
+            {
+                block = classScene.Instantiate<Class>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
+                if (!Classes.Contains(block as Class))
+                    Classes.Add(block as Class);
             }
             else if (trimmed.Substring(0, 3) == "if ")
             {
                 block = ifScene.Instantiate<If>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
+            }
+            else if (trimmed.Substring(0, 4) == "for ")
+            {
+                block = forScene.Instantiate<For>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
             }
             else if (trimmed.Substring(0,5) == "else:" || trimmed.Substring(0,5) == "else ")
             {

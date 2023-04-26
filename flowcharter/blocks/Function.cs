@@ -28,7 +28,7 @@ public partial class Function : Block
             {
                 if (block.Separate)
                     continue;
-                if (block is If || block is While)
+                if (block is If || block is While || block is For)
                 {
                     block.Position = new Vector2I(UniversalShapeWidth * (prevIfWidth == 0 ? Width - 1 : Width), UniversalShapeHeight * v);
                     block.Update();
@@ -46,7 +46,6 @@ public partial class Function : Block
                     block.Update();
                     prevIfWidth = Math.Max(prevIfWidth, block.Width);
                 }
-                block.Update();
                 v += block.Height;
             }
         }

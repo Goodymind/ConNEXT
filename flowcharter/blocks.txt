@@ -2,16 +2,16 @@ PROGRESS
 def - done
 if - done
 else - done
-class - skip // irrelevant
-switch
-for
-while
-try
-except
+class - 
+switch - 
+for - done
+while - done
+try -
+except - 
 finally
-return - done
-break - done
-continue - ehhh done?
-yield - done
+return - 
+break - 
+continue - 
+yield - 
 pass - done
 
