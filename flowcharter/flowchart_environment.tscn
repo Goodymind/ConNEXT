@@ -17,3 +17,5 @@ position_smoothing_speed = 20.0
 script = ExtResource("2_lf5d3")
 
 [node name="Functions" type="Node2D" parent="."]
+
+[node name="Classes" type="Node2D" parent="."]

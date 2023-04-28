@@ -77,5 +77,5 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[connection signal="item_selected" from="VBoxContainer/ItemList" to="." method="ItemListSelected"]
-[connection signal="item_selected" from="VBoxContainer/ClassList" to="." method="ItemListSelected"]
+[connection signal="item_clicked" from="VBoxContainer/ItemList" to="." method="ItemListSelected"]
+[connection signal="item_clicked" from="VBoxContainer/ClassList" to="." method="ClassItemListSelected"]

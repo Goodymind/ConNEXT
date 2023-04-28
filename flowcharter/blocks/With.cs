@@ -2,16 +2,11 @@ using Godot;
 using System;
 using Flowcharter.shapes;
 namespace Flowcharter.flowcharter.blocks;
-public partial class Function : Block
+public partial class With: Block
 {
-    public Function()
-    {
-        Separate = true;
-    }
-    public override void _Ready()
-    {
-        AddChild(FlowchartGenerator.shapeScene.Instantiate<NewShape>().Init(Name, Line, NewShape.Shapes.TERMINATOR));
-    }
+    public With() => Separate = false;
+    public override void _Ready() => AddChild(FlowchartGenerator.shapeScene.Instantiate<NewShape>().Init(Name, Line, NewShape.Shapes.PROCESS));
+    
     public override void Update()
     {
         int v = 0;

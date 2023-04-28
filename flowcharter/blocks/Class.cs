@@ -1,10 +1,12 @@
-using Godot;
 using System;
+using Godot;
 using Flowcharter.shapes;
 namespace Flowcharter.flowcharter.blocks;
-public partial class Function : Block
+public partial class Class : Block
 {
-    public Function()
+
+
+    public Class()
     {
         Separate = true;
     }

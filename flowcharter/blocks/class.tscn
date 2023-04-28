@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1h2sf1d5wfvl"]
+
+[ext_resource type="Script" path="res://flowcharter/blocks/Class.cs" id="1_x27il"]
+
+[node name="Class" type="Node2D"]
+script = ExtResource("1_x27il")

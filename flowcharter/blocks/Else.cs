@@ -20,7 +20,7 @@ public partial class Else : Block
             {
                 if (block.Separate)
                     continue;
-                if (block is If || block is While || block is For)
+                if (block is If || block is While || block is For || block is With)
                 {
                     block.Position = new Vector2I(UniversalShapeWidth * (prevIfWidth == 0 ? Width - 1 : Width), UniversalShapeHeight * v);
                     block.Update();

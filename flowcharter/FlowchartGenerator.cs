@@ -16,6 +16,7 @@ public partial class FlowchartGenerator : Node2D
     static PackedScene whileScene = GD.Load<PackedScene>("res://flowcharter/blocks/while.tscn");
     static PackedScene forScene = GD.Load<PackedScene>("res://flowcharter/blocks/for.tscn");
     static PackedScene classScene = GD.Load<PackedScene>("res://flowcharter/blocks/class.tscn");
+    static PackedScene withScene = GD.Load<PackedScene>("res://flowcharter/blocks/with.tscn");
     List<string> FileLines;
     List<Function> Functions = new List<Function>();
     List<Class> Classes = new List<Class>();
@@ -56,17 +57,14 @@ public partial class FlowchartGenerator : Node2D
         if (trimmed.Last() == ':')
         {
             Block block = null;
+            if (trimmed.Length > 6)
+                if (trimmed.Substring(0, 6) == "async ")
+                    trimmed = trimmed.Remove(0,6);
             if (trimmed.Substring(0, 4) == "def ")
             {
                 block = functionScene.Instantiate<Function>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
                 if (!Functions.Contains(block as Function))
                     Functions.Add(block as Function);
-            }
-            if (trimmed.Substring(0, 4) == "class ")
-            {
-                block = classScene.Instantiate<Class>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
-                if (!Classes.Contains(block as Class))
-                    Classes.Add(block as Class);
             }
             else if (trimmed.Substring(0, 3) == "if ")
             {
@@ -84,8 +82,18 @@ public partial class FlowchartGenerator : Node2D
             {
                 block = elifScene.Instantiate<Elif>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
             }
+            else if (trimmed.Substring(0,5) == "with ")
+            {
+                block = withScene.Instantiate<With>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
+            }
             else if (trimmed.Substring(0,6) == "while ")
                 block = whileScene.Instantiate<While>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
+            else if (trimmed.Substring(0, 6) == "class ")
+            {
+                block = classScene.Instantiate<Class>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
+                if (!Classes.Contains(block as Class))
+                    Classes.Add(block as Class);
+            }
             MostRecentParent.AddChild(block);
             MostRecentParent = block;
             return;
@@ -94,9 +102,13 @@ public partial class FlowchartGenerator : Node2D
     }
     private void SeparateFunctions()
     {
+        foreach (var c in Classes)
+            c.Reparent(GetNode("Classes"), false);
         foreach (var f in Functions)
             f.Reparent(GetNode("Functions"), false);
         foreach (var f in Functions)
             f.Update();
+        foreach (var c in Classes)
+            c.Update();
     }
 }

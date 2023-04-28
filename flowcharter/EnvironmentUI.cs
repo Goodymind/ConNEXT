@@ -44,7 +44,7 @@ public partial class EnvironmentUI : Control
         }
         Functions[0].Visible = true;
     }
-    public void ItemListSelected(int index)
+    public void ItemListSelected(int index, Vector2 position, int mouse_index)
     {
         if (Functions is null)
             return;
@@ -56,6 +56,22 @@ public partial class EnvironmentUI : Control
                 f.Visible = true;
             }
         }
-
+        foreach (var c in Classes)
+            c.Visible = false;
+    }
+    public void ClassItemListSelected(int index, Vector2 position,int mouse_index)
+    {
+        if (Classes is null)
+            return;
+        foreach (var f in Classes)
+        {
+            f.Visible = false;
+            if (f == Classes[index])
+            {
+                f.Visible = true;
+            }
+        }
+        foreach (var f in Functions)
+            f.Visible = false;
     }
 }

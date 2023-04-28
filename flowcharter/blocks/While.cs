@@ -27,7 +27,7 @@ public partial class While : Block
                 if (block.Separate)
                     continue;
                 block.Update();
-                if (block is If || block is While || block is For)
+                if (block is If || block is While || block is For || block is With)
                 {
                     height += 1;
                     block.Position = new Vector2I(UniversalShapeWidth * i, UniversalShapeHeight * height);
