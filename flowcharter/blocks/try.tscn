@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bngxeladotgdx"]
+
+[ext_resource type="Script" path="res://flowcharter/blocks/Try.cs" id="1_x3jdq"]
+
+[node name="Try" type="Node2D"]
+script = ExtResource("1_x3jdq")

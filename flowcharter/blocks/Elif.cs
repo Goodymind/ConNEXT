@@ -20,7 +20,7 @@ public partial class Elif : Block
         int height = 0;
         int prevI = 0;
         int prevHeight = 0;
-        foreach (var c in Children)
+        foreach (var (c,index) in Children.WithIndex())
         {
             if (c is NewShape shape)
             {
@@ -34,7 +34,7 @@ public partial class Elif : Block
                 if (block.Separate)
                     continue;
                 block.Update();
-                if (block is If || block is While || block is For || block is With)
+                if (block is If || block is While || block is For || block is With || block is Try || block is Finally)
                 {
                     height += 1;
                     block.Position = new Vector2I(UniversalShapeWidth * i, UniversalShapeHeight * height);
@@ -43,7 +43,7 @@ public partial class Elif : Block
                     height += block.Height-1;
                     prevHeight = block.Height;
                 }
-                if (block is Elif)
+                if (block is Elif || block is Except)
                 {
                     height += 1;
                     block.Position = new Vector2I(UniversalShapeWidth * (prevI), UniversalShapeHeight * height);
@@ -54,7 +54,14 @@ public partial class Elif : Block
                 if (block is Else)
                 {
                     height += 1;
-                    block.Position = new Vector2I(UniversalShapeWidth * (prevI), UniversalShapeHeight * height);
+                    var previous = Children[index -1];
+                    if (previous is If || previous is Elif)
+                        block.Position = new Vector2I(UniversalShapeWidth * (prevI), UniversalShapeHeight * height);
+                    else if (previous is Except)
+                    {
+                        block.Position = new Vector2I(UniversalShapeWidth * Width, UniversalShapeHeight * height);
+                        i = Math.Max(i, prevI + block.Width) + 1;
+                    }
                     height += block.Height-1;
                     prevHeight = block.Height;
                     i = Math.Max(i, prevI + block.Width);

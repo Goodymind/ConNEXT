@@ -17,6 +17,9 @@ public partial class FlowchartGenerator : Node2D
     static PackedScene forScene = GD.Load<PackedScene>("res://flowcharter/blocks/for.tscn");
     static PackedScene classScene = GD.Load<PackedScene>("res://flowcharter/blocks/class.tscn");
     static PackedScene withScene = GD.Load<PackedScene>("res://flowcharter/blocks/with.tscn");
+    static PackedScene tryScene = GD.Load<PackedScene>("res://flowcharter/blocks/try.tscn");
+    static PackedScene exceptScene = GD.Load<PackedScene>("res://flowcharter/blocks/except.tscn");
+    static PackedScene finallyScene = GD.Load<PackedScene>("res://flowcharter/blocks/finally.tscn");
     List<string> FileLines;
     List<Function> Functions = new List<Function>();
     List<Class> Classes = new List<Class>();
@@ -59,34 +62,38 @@ public partial class FlowchartGenerator : Node2D
             Block block = null;
             if (trimmed.Length > 6)
                 if (trimmed.Substring(0, 6) == "async ")
-                    trimmed = trimmed.Remove(0,6);
-            if (trimmed.Substring(0, 4) == "def ")
+                    trimmed = trimmed.Remove(0, 6);
+            if (trimmed.Substring(0, 3) == "if ")
+            {
+                block = ifScene.Instantiate<If>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
+            }
+            else if (trimmed.Substring(0, 4) == "try:" || trimmed.Substring(0, 4) == "try ")
+            {
+                block = tryScene.Instantiate<Try>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
+            }
+            else if (trimmed.Substring(0, 4) == "def ")
             {
                 block = functionScene.Instantiate<Function>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
                 if (!Functions.Contains(block as Function))
                     Functions.Add(block as Function);
             }
-            else if (trimmed.Substring(0, 3) == "if ")
-            {
-                block = ifScene.Instantiate<If>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
-            }
             else if (trimmed.Substring(0, 4) == "for ")
             {
                 block = forScene.Instantiate<For>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
             }
-            else if (trimmed.Substring(0,5) == "else:" || trimmed.Substring(0,5) == "else ")
+            else if (trimmed.Substring(0, 5) == "else:" || trimmed.Substring(0, 5) == "else ")
             {
                 block = elseScene.Instantiate<Else>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
             }
-            else if (trimmed.Substring(0,5) == "elif ")
+            else if (trimmed.Substring(0, 5) == "elif ")
             {
                 block = elifScene.Instantiate<Elif>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
             }
-            else if (trimmed.Substring(0,5) == "with ")
+            else if (trimmed.Substring(0, 5) == "with ")
             {
                 block = withScene.Instantiate<With>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
             }
-            else if (trimmed.Substring(0,6) == "while ")
+            else if (trimmed.Substring(0, 6) == "while ")
                 block = whileScene.Instantiate<While>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
             else if (trimmed.Substring(0, 6) == "class ")
             {
@@ -94,6 +101,10 @@ public partial class FlowchartGenerator : Node2D
                 if (!Classes.Contains(block as Class))
                     Classes.Add(block as Class);
             }
+            else if (trimmed.Substring(0, 7) == "except " || trimmed.Substring(0, 7) == "except:")
+                block = exceptScene.Instantiate<Except>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
+            else if (trimmed.Substring(0, 8) == "finally " || trimmed.Substring(0,8) == "finally:")
+                block = finallyScene.Instantiate<Finally>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
             MostRecentParent.AddChild(block);
             MostRecentParent = block;
             return;

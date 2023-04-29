@@ -1,18 +1,11 @@
 using Godot;
-using Flowcharter.shapes;
 using System;
+using Flowcharter.shapes;
 namespace Flowcharter.flowcharter.blocks;
-
-public partial class If : Block
+public partial class Try : Block
 {
-    public If()
-    {
-        Separate = false;
-    }
-    public override void _Ready()
-    {
-        AddChild(FlowchartGenerator.shapeScene.Instantiate<NewShape>().Init(Name, Line, NewShape.Shapes.DECISION));
-    }
+    public Try() => Separate = false;
+    public override void _Ready() => AddChild(FlowchartGenerator.shapeScene.Instantiate<NewShape>().Init(Name, Line, NewShape.Shapes.DECISION));
     public override void Update()
     {
         int i = 0;
@@ -68,4 +61,5 @@ public partial class If : Block
             }
         }
     }
+
 }

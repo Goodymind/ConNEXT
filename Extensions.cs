@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 public static class Extensions
 {
     public static int LeadingSpaces(this string word) => word.TakeWhile(c => char.IsWhiteSpace(c)).Count();
@@ -37,6 +38,9 @@ public static class Extensions
         // Otherwise, return null to indicate no class name was found
         return null;
     }
+
+    public static IEnumerable<(T item, int index)> WithIndex<T>(this IEnumerable<T> self)       
+       => self.Select((item, index) => (item, index));
 
 
 }

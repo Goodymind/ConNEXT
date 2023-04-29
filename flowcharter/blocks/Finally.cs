@@ -2,15 +2,12 @@ using System;
 using Godot;
 using Flowcharter.shapes;
 namespace Flowcharter.flowcharter.blocks;
-public partial class Class : Block
+public partial class Finally : Block
 {
-    public Class()
-    {
-        Separate = true;
-    }
+    public Finally() => Separate = false;
     public override void _Ready()
     {
-        AddChild(FlowchartGenerator.shapeScene.Instantiate<NewShape>().Init(Name, Line, NewShape.Shapes.TERMINATOR));
+        //AddChild(FlowchartGenerator.shapeScene.Instantiate<NewShape>().Init(Name, Line, NewShape.Shapes.PROCESS));
     }
     public override void Update()
     {
