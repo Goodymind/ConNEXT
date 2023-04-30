@@ -6,10 +6,10 @@ using Flowcharter.shapes;
 public partial class NewFlowchartGenerator : Node2D
 {
     NewBlock mostRecentParent;
-    List<string> file = new List<string>();
-    public static PackedScene shapeScene = GD.Load<PackedScene>("res://shapes/shape.tscn");
-    public static PackedScene newBlock = GD.Load<PackedScene>("res://flowcharter/newBlock.tscn");
-    List<NewBlock> Functions = new List<NewBlock>();
+    List<string> file = new();
+    public static readonly PackedScene shapeScene = GD.Load<PackedScene>("res://shapes/shape.tscn");
+    public static readonly PackedScene newBlock = GD.Load<PackedScene>("res://flowcharter/newBlock.tscn");
+    List<NewBlock> Functions = new();
     EnvironmentUI UI;
     public override void _Ready()
     {

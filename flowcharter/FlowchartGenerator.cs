@@ -20,8 +20,8 @@ public partial class FlowchartGenerator : Node2D
     static readonly PackedScene exceptScene = GD.Load<PackedScene>("res://flowcharter/blocks/except.tscn");
     static readonly PackedScene finallyScene = GD.Load<PackedScene>("res://flowcharter/blocks/finally.tscn");
     List<string> FileLines;
-    List<Function> Functions = new List<Function>();
-    List<Class> Classes = new List<Class>();
+    List<Function> Functions = new();
+    List<Class> Classes = new();
     EnvironmentUI UI;
     public override void _Ready()
     {
@@ -66,7 +66,7 @@ public partial class FlowchartGenerator : Node2D
             {
                 block = ifScene.Instantiate<If>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
             }
-            else if (trimmed.Substring(0, 4) == "try:" || trimmed.Substring(0, 4) == "try ")
+            else if (trimmed.Substring(0, 4) is "try:" or "try ")
             {
                 block = tryScene.Instantiate<Try>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
             }
@@ -80,7 +80,7 @@ public partial class FlowchartGenerator : Node2D
             {
                 block = forScene.Instantiate<For>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
             }
-            else if (trimmed.Substring(0, 5) == "else:" || trimmed.Substring(0, 5) == "else ")
+            else if (trimmed.Substring(0, 5) is "else:" or "else ")
             {
                 block = elseScene.Instantiate<Else>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
             }
@@ -100,9 +100,9 @@ public partial class FlowchartGenerator : Node2D
                 if (!Classes.Contains(block as Class))
                     Classes.Add(block as Class);
             }
-            else if (trimmed.Substring(0, 7) == "except " || trimmed.Substring(0, 7) == "except:")
+            else if (trimmed.Substring(0, 7) is "except " or "except:")
                 block = exceptScene.Instantiate<Except>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
-            else if (trimmed.Substring(0, 8) == "finally " || trimmed.Substring(0,8) == "finally:")
+            else if (trimmed.Substring(0, 8) is "finally " or "finally:")
                 block = finallyScene.Instantiate<Finally>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
             MostRecentParent.AddChild(block);
             MostRecentParent = block;
