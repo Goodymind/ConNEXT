@@ -1,7 +1,7 @@
-using System.Collections.Generic;
-using Godot;
-using Flowcharter.flowcharter.blocks;
 namespace Flowcharter.flowcharter;
+
+using Flowcharter.flowcharter.blocks;
+
 public partial class EnvironmentUI : Control
 {
     ItemList List;

@@ -1,6 +1,6 @@
-using Godot;
-using Flowcharter.flowcharter;
 namespace Flowcharter.utils;
+
+using Flowcharter.flowcharter;
 
 public partial class EnvironmentCamera : Camera2D
 {

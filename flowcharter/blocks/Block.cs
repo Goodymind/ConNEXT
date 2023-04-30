@@ -1,9 +1,7 @@
-using Godot;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Flowcharter.shapes;
 namespace Flowcharter.flowcharter.blocks;
+
+using Flowcharter.shapes;
+
 public partial class Block : Node2D
 {
     public int UniversalShapeWidth = 136;

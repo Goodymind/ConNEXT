@@ -1,8 +1,7 @@
-using Godot;
-using System;
-using System.Collections.Generic;
-using Flowcharter.shapes;
 namespace Flowcharter.flowcharter.blocks;
+
+using Flowcharter.shapes;
+
 public partial class Function : Block
 {
     public Function()

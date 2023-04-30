@@ -1,7 +1,7 @@
-using System;
-using Godot;
-using Flowcharter.shapes;
 namespace Flowcharter.flowcharter.blocks;
+
+using Flowcharter.shapes;
+
 public partial class Class : Block
 {
     public Class()

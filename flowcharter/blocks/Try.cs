@@ -1,7 +1,7 @@
-using Godot;
-using System;
-using Flowcharter.shapes;
 namespace Flowcharter.flowcharter.blocks;
+
+using Flowcharter.shapes;
+
 public partial class Try : Block
 {
     public Try() => Separate = false;

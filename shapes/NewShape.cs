@@ -1,7 +1,7 @@
-using Godot;
-using System;
-using Flowcharter.flowcharter.blocks;
 namespace Flowcharter.shapes;
+
+using Flowcharter.flowcharter.blocks;
+
 public partial class NewShape : Sprite2D
 {
     public enum Shapes

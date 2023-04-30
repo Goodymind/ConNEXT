@@ -1,4 +1,3 @@
-using Godot;
 namespace Flowcharter.shapes.arrow
 {
     [Tool]

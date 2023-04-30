@@ -1,6 +1,5 @@
-using System.Linq;
 using System.Text.RegularExpressions;
-using System.Collections.Generic;
+
 public static class Extensions
 {
     public static int LeadingSpaces(this string word) => word.TakeWhile(c => char.IsWhiteSpace(c)).Count();

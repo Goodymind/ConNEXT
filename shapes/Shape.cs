@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Godot;
 namespace Flowcharter.shapes
 {
     public partial class Shape : Sprite2D

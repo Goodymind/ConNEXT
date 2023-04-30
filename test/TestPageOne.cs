@@ -1,6 +1,3 @@
-using Godot;
-using System;
-
 public partial class TestPageOne : Node
 {
     public override void _Ready()

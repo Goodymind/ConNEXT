@@ -1,7 +1,6 @@
-using Godot;
-using Flowcharter.shapes;
-using System;
 namespace Flowcharter.flowcharter.blocks;
+
+using Flowcharter.shapes;
 
 public partial class If : Block
 {

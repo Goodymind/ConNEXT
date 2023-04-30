@@ -1,10 +1,9 @@
-using Godot;
-using System.Collections.Generic;
+namespace Flowcharter.flowcharter;
+
 using System.IO;
-using System.Linq;
 using Flowcharter.flowcharter.blocks;
 using Flowcharter.shapes;
-namespace Flowcharter.flowcharter;
+
 public partial class FlowchartGenerator : Node2D
 {
     Block MostRecentParent;

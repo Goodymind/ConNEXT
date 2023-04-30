@@ -1,9 +1,7 @@
-using Godot;
-using Flowcharter.shapes;
-using System.Linq;
-using System;
-using System.Collections.Generic;
 namespace Flowcharter.flowcharter;
+
+using Flowcharter.shapes;
+
 public partial class NewBlock : Node2D
 {
     public NewBlock RootBlock;
