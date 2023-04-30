@@ -15,7 +15,8 @@ public partial class Elif : Block
     }
     public override void Update()
     {
-        
+        RightWardUpdate();
+        /*
         int i = 0;
         int height = 0;
         int prevI = 0;
@@ -68,5 +69,6 @@ public partial class Elif : Block
                 }
             }
         }
+        */
     }
 }

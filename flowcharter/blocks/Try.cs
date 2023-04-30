@@ -8,6 +8,8 @@ public partial class Try : Block
     public override void _Ready() => AddChild(FlowchartGenerator.shapeScene.Instantiate<NewShape>().Init(Name, Line, NewShape.Shapes.DECISION));
     public override void Update()
     {
+        RightWardUpdate();
+        /*
         int i = 0;
         int height = 0;
         int prevI = 0;
@@ -60,6 +62,7 @@ public partial class Try : Block
                 }
             }
         }
+        */
     }
 
 }

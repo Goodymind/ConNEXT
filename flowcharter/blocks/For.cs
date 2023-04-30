@@ -9,12 +9,15 @@ public partial class For : Block
         AddChild(FlowchartGenerator.shapeScene.Instantiate<NewShape>().Init(Name, Line, NewShape.Shapes.DECISION));
     public override void Update()
     {
+        RightWardUpdate();
+        /*
         int i = 0;
         int height = 0;
         int prevI = 0;
         int prevHeight = 0;
         foreach (var (c,index) in Children.WithIndex())
         {
+            
             if (c is NewShape shape)
             {
                 height += prevHeight == 0? 0: 1;
@@ -60,7 +63,9 @@ public partial class For : Block
                     i = Math.Max(i, prevI + block.Width);
                 }
             }
+            
         }
+        */
     }
 
 
