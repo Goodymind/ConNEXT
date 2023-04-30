@@ -1,42 +1,41 @@
-namespace Flowcharter.shapes
+namespace Flowcharter.shapes;
+
+public partial class Shape : Sprite2D
 {
-    public partial class Shape : Sprite2D
+    public enum Shapes
     {
-        public enum Shapes
+        //process/operation symbols
+        PROCESS,
+        //Branching and control flow
+        TERMINATOR, DECISION
+    }
+    public Shapes shape;
+    string line = "";
+    public List<Shape> Inputs = new List<Shape>();
+    public List<Shape> Outputs = new List<Shape>();
+    public Shape Init(string line, string name,string type = "")
+    {
+        if (type == "def")
         {
-            //process/operation symbols
-            PROCESS,
-            //Branching and control flow
-            TERMINATOR, DECISION
+            shape = Shapes.TERMINATOR;
         }
-        public Shapes shape;
-        string line = "";
-        public List<Shape> Inputs = new List<Shape>();
-        public List<Shape> Outputs = new List<Shape>();
-        public Shape Init(string line, string name,string type = "")
+        else if (type == "if")
         {
-            if (type == "def")
-            {
-                shape = Shapes.TERMINATOR;
-            }
-            else if (type == "if")
-            {
-                shape = Shapes.DECISION;
-            }
-            else
-            {
-                shape = Shapes.PROCESS;
-            }
-            this.line = line;
-            this.Name = name;
-            return this;
-            
+            shape = Shapes.DECISION;
         }
-        public override void _Ready()
+        else
         {
-            Texture = GD.Load<Texture2D>($"res://shapes/images/{shape}.svg");
-            GetNode<Label>("Label").Text = line.Trim();
+            shape = Shapes.PROCESS;
         }
+        this.line = line;
+        this.Name = name;
+        return this;
         
     }
+    public override void _Ready()
+    {
+        Texture = GD.Load<Texture2D>($"res://shapes/images/{shape}.svg");
+        GetNode<Label>("Label").Text = line.Trim();
+    }
+    
 }
