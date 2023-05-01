@@ -6,10 +6,45 @@ using Flowcharter.shapes;
 namespace Flowcharter.flowcharter.blocks;
 public partial class Block : Node2D
 {
-    public int UniversalShapeWidth = 136;
-    public int UniversalShapeHeight = 102;
+    public static PackedScene lineScene = GD.Load<PackedScene>("res://flowcharter/line_drawer.tscn");
+    public List<Vector2> Output
+    {
+        get
+        {
+            if (Children.Last() is NewShape shape)
+            {
+                if (shape.line.ToString().ContainsBreakers())
+                {
+                    return new List<Vector2>();
+                }
+                return new List<Vector2>() { shape.GlobalPosition };
+            }
+            List<Vector2> outputs = new List<Vector2>();
+            for (int i = Children.Count - 1; i >= 0; i--)
+            {
+                var c = Children[i];
+                if (c is NewShape newshape)
+                {
+                    outputs.Add(c.GlobalPosition);
+                    return outputs;
+                }
+                var child = c as Block;
+                if (child is If)
+                    outputs.AddRange(child.Output);
+                if (child is Else || child is Elif)
+                    outputs.AddRange(child.Output);
+                if (child is While || child is For)
+                    outputs.Add(child.GlobalPosition);
+            }
+            return outputs;
+        }
+    }
+    public static int UniversalShapeWidth = 136;
+    public static int UniversalShapeHeight = 102;
+    public static Vector2I UnivScale => new Vector2I(UniversalShapeWidth, UniversalShapeHeight);
     public bool Separate;
     public int LeadingSpaces;
+    protected bool Updated = false;
     public string Line;
     public int Width
     {
@@ -99,8 +134,8 @@ public partial class Block : Node2D
                 }
                 if (block is Else)
                 {
-                    var previous = Children[index-1];
-                    if (previous is If || previous is Elif)
+                    var previous = Children[index - 1];
+                    if (previous is If || previous is Elif || previous is While || previous is For)
                         block.Position = new Vector2I(UniversalShapeWidth * (Width - prevIfWidth), UniversalShapeHeight * v);
                     else if (previous is Except)
                         block.Position = new Vector2I(UniversalShapeWidth * (Width), UniversalShapeHeight * v);
@@ -116,6 +151,8 @@ public partial class Block : Node2D
                 v += block.Height;
             }
         }
+        Updated = true;
+        QueueRedraw();
     }
     public void RightWardUpdate()
     {
@@ -123,11 +160,11 @@ public partial class Block : Node2D
         int height = 0;
         int prevI = 0;
         int prevHeight = 0;
-        foreach (var (c,index) in Children.WithIndex())
+        foreach (var (c, index) in Children.WithIndex())
         {
             if (c is NewShape shape)
             {
-                height += prevHeight == 0? 0: 1;
+                height += prevHeight == 0 ? 0 : 1;
                 c.Position = new Vector2I(UniversalShapeWidth * i, UniversalShapeHeight * height);
                 i += 1;
                 prevHeight = 0;
@@ -143,34 +180,36 @@ public partial class Block : Node2D
                     block.Position = new Vector2I(UniversalShapeWidth * i, UniversalShapeHeight * height);
                     prevI = i;
                     i += block.Width;
-                    height += block.Height-1;
+                    height += block.Height - 1;
                     prevHeight = block.Height;
                 }
                 if (block is Elif || block is Except)
                 {
                     height += 1;
                     block.Position = new Vector2I(UniversalShapeWidth * (prevI), UniversalShapeHeight * height);
-                    height += block.Height-1;
+                    height += block.Height - 1;
                     prevHeight = block.Height;
                     i = Math.Max(i, prevI + block.Width);
                 }
                 if (block is Else)
                 {
                     height += 1;
-                    var previous = Children[index -1];
-                    if (previous is If || previous is Elif)
+                    var previous = Children[index - 1];
+                    if (previous is If || previous is Elif || previous is While || previous is For)
                         block.Position = new Vector2I(UniversalShapeWidth * (prevI), UniversalShapeHeight * height);
                     else if (previous is Except)
                     {
                         block.Position = new Vector2I(UniversalShapeWidth * Width, UniversalShapeHeight * height);
                         i = Math.Max(i, prevI + block.Width) + 1;
                     }
-                    height += block.Height-1;
+                    height += block.Height - 1;
                     prevHeight = block.Height;
                     i = Math.Max(i, prevI + block.Width);
                 }
             }
         }
+        Updated = true;
+        QueueRedraw();
     }
     public virtual Block Init(int leadingSpaces, string name)
     {
@@ -178,6 +217,84 @@ public partial class Block : Node2D
         this.Name = name;
         this.Line = name;
         return this;
+    }
+    public override void _Draw()
+    {
+        if (!Updated)
+            return;
+        List<Vector2> positions = new List<Vector2>();
+        for (int i = 0; i < Children.Count; i++)
+        {
+            var output = Children[i];
+            var input = i == Children.Count - 1 ? null : Children[i + 1];
+            if (output is NewShape shape)
+            {
+                if (input is null) continue;
+                if (shape.line.ContainsBreakers()) continue;
+                positions.Add(output.GlobalPosition);
+                positions.Add(new Vector2(output.GlobalPosition.X, input.GlobalPosition.Y));
+                positions.Add(new Vector2(output.GlobalPosition.X, input.GlobalPosition.Y));
+                positions.Add(input.GlobalPosition);
+            }
+            else if (output is Block outblock)
+            {
+                if (output is If || output is Elif)
+                {
+                    if (input is null) continue;
+                    positions.Add(output.GlobalPosition);
+                    positions.Add(new Vector2(output.GlobalPosition.X, input.GlobalPosition.Y));
+                    positions.Add(new Vector2(output.GlobalPosition.X, input.GlobalPosition.Y));
+                    positions.Add(input.GlobalPosition);
+                    int j = 1;
+                    while (input is Elif || input is Else && i + j < Children.Count)
+                    {
+                        input = Children[i + j];
+                        j++;
+                    }
+                    foreach (var pos in outblock.Output)
+                    {
+                        positions.Add(pos);
+                        positions.Add(new Vector2(input.GlobalPosition.X, pos.Y));
+                        positions.Add(new Vector2(input.GlobalPosition.X, pos.Y));
+                        positions.Add(input.GlobalPosition);
+                    }
+                }
+                if (output is Else)
+                {
+                    if (input is null) continue;
+                    foreach (var pos in outblock.Output)
+                    {
+                        positions.Add(pos);
+                        positions.Add(new Vector2(input.GlobalPosition.X, pos.Y));
+                        positions.Add(new Vector2(input.GlobalPosition.X, pos.Y));
+                        positions.Add(input.GlobalPosition);
+                    }
+                }
+                if (output is While || output is For)
+                {
+                    foreach (var outp in outblock.Output)
+                    {
+                        if (outp == outblock.GlobalPosition) continue;
+                        positions.Add(outp);
+                        positions.Add(new Vector2(outblock.Width * UniversalShapeWidth + output.GlobalPosition.X, outp.Y));
+                        positions.Add(new Vector2(outblock.Width * UniversalShapeWidth + output.GlobalPosition.X, outp.Y));
+                        positions.Add(output.GlobalPosition + new Vector2(outblock.Width * UniversalShapeWidth, -UniversalShapeHeight / 2));
+                        positions.Add(output.GlobalPosition + new Vector2(outblock.Width * UniversalShapeWidth, -UniversalShapeHeight / 2));
+                        positions.Add(output.GlobalPosition + Vector2.Up * UniversalShapeHeight / 2);
+                        positions.Add(output.GlobalPosition + Vector2.Up * UniversalShapeHeight / 2);
+                        positions.Add(output.GlobalPosition);
+                    }
+                    if (input is null) continue;
+                    positions.Add(output.GlobalPosition);
+                    positions.Add(new Vector2(output.GlobalPosition.X, input.GlobalPosition.Y));
+                    positions.Add(new Vector2(output.GlobalPosition.X, input.GlobalPosition.Y));
+                    positions.Add(input.GlobalPosition);
+                }
+            }
+        }
+        if (positions.Count < 2)
+            return;
+        DrawMultiline(positions.Select(x => ToLocal(x)).ToArray(), Colors.Red, 3);
     }
 
 }

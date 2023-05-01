@@ -12,7 +12,7 @@ public partial class NewShape : Sprite2D
         TERMINATOR, DECISION
     }
     private Shapes shape;
-    private string line;
+    public string line;
     public NewShape Init(string name, string line, Shapes shape)
     {
         this.shape = shape;

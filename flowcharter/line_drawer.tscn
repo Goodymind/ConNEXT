@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://7wldvlvjtwji"]
+
+[ext_resource type="Script" path="res://flowcharter/LineDrawer.cs" id="1_uiqkp"]
+
+[node name="LineDrawer" type="Node2D"]
+script = ExtResource("1_uiqkp")

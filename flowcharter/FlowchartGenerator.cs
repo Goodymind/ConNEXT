@@ -35,18 +35,26 @@ public partial class FlowchartGenerator : Node2D
         MostRecentParent = new Function().Init(0, "START OF THE CODE");
         Functions.Add(MostRecentParent as Function);
         AddChild(MostRecentParent);
+        string line = "";
         for (int i = 0; i < FileLines.Count; i++)
         {
-            if (string.IsNullOrWhiteSpace(FileLines[i]) || string.IsNullOrEmpty(FileLines[i]))
+            if (line == "")
+                line = FileLines[i];
+            else
+                line += FileLines[i].Trim();
+            if (line.Open())
+            {
                 continue;
-            Analyze(FileLines[i], i);
+            }
+            Analyze(line, i);
+            line = "";
         }
         SeparateFunctions();
         UI.Update(Functions, Classes);
     }
     private void Read(string path)
     {
-        FileLines = File.ReadAllLines(path).ToList<string>();
+        FileLines = File.ReadAllLines(path).ToList<string>().RemoveComments().RemoveWhitespaces();
     }
     private void Analyze(string line, int index)
     {
@@ -56,7 +64,6 @@ public partial class FlowchartGenerator : Node2D
             MostRecentParent = MostRecentParent.GetParent<Block>();
         }
         string trimmed = line.Trim();
-        //GD.PrintT(index, line, MostRecentParent.Name);
         if (trimmed.Last() == ':')
         {
             Block block = null;
@@ -103,7 +110,7 @@ public partial class FlowchartGenerator : Node2D
             }
             else if (trimmed.Substring(0, 7) == "except " || trimmed.Substring(0, 7) == "except:")
                 block = exceptScene.Instantiate<Except>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
-            else if (trimmed.Substring(0, 8) == "finally " || trimmed.Substring(0,8) == "finally:")
+            else if (trimmed.Substring(0, 8) == "finally " || trimmed.Substring(0, 8) == "finally:")
                 block = finallyScene.Instantiate<Finally>().Init(FileLines[index + 1].LeadingSpaces(), trimmed);
             MostRecentParent.AddChild(block);
             MostRecentParent = block;

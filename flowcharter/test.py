@@ -1,98 +1,31 @@
+def partition(array, low, high):
 
-def binarySearch(arr, x):
-    low = 0
-    high = len(arr) - 1
-    mid = 0
-    while low <= high:
-        mid = (high + low) // 2
-        if arr[mid] < x:
-            low = mid + 1
-        elif arr[mid] > x:
-            high = mid - 1
-        else:
-            return mid
-    return -1
+	pivot = array[high]
 
+	i = low - 1
+	for j in range(low, high):
+		if array[j] <= pivot:
 
-def lastTwo(string):
-    return string[-2:]
-pairs = {}
-def testing():
-    with open('noi/ruleofthree.txt', 'r') as f:
-        n = int(f.readline())
-        aintegers = list(map(int, map(lastTwo, f.readline().split())))
-        bintegers = list(map(int, map(lastTwo, f.readline().split())))
-        cintegers = list(map(int, map(lastTwo, f.readline().split())))
-        aintegers.sort()
-        bintegers.sort()
-        cintegers.sort()
-        count = 0
-        for a in aintegers:
-            for b in bintegers:
-                tofind = 100 - a - b
-                if tofind == 100:
-                    tofind = 0
-                while tofind < 0:
-                    tofind += 100
-                start = binarySearch(cintegers, tofind)
-                if start == -1:
-                    continue
-                
-                low = start
-                high = start
-                for i in range(start, len(cintegers)):
-                    if cintegers[i] != tofind:
-                        break
-                    high = i
-                for i in range(start, -1, -1):
-                    if cintegers[i] != tofind:
-                        break
-                    low = i
-                count += high - low + 1
-                key = (a, b, tofind)
-                if key in pairs.keys():
-                    pairs[key] += high - low + 1
-                else:
-                    pairs[key] = high - low + 1
-        print(count)
-    with open('noi/output.txt', 'w') as f:
-        keys = list(pairs.items())
-        keys.sort(key = lambda x : (x[0][0],x[0][1],x[0][2]))
-        for key in keys:
-            f.write(f'{key[0]} {key[1]} \n')
+			i = i + 1
+			(array[i], array[j]) = (array[j], array[i])
 
-def main():
-    n = int(input())
-    aintegers = list(map(int, map(lastTwo, input().split())))
-    bintegers = list(map(int, map(lastTwo, input().split())))
-    cintegers = list(map(int, map(lastTwo, input().split())))
-    aintegers.sort()
-    bintegers.sort()
-    cintegers.sort()
-    count = 0
-    for a in aintegers:
-        for b in bintegers:
-            tofind = 100 - a - b
-            if tofind == 100:
-                tofind = 0
-            while tofind < 0:
-                tofind += 100
-            start = binarySearch(cintegers, tofind)
-            if start == -1:
-                continue
-            
-            low = start
-            high = start
-            for i in range(start, len(cintegers)):
-                if cintegers[i] != tofind:
-                    break
-                high = i
-            for i in range(start, -1, -1):
-                if cintegers[i] != tofind:
-                    break
-                low = i
-            count += high - low + 1
-    print(count)
+	(array[i + 1], array[high]) = (array[high], array[i + 1])
+
+	return i + 1
 
 
-testing()
+def quickSort(array, low, high):
+	if low < high:
+
+		pi = partition(array, low, high)
+
+		quickSort(array, low, pi - 1)
+
+		quickSort(array, pi + 1, high)
+data = [1, 7, 4, 1, 10, 9, -2]
+print("Unsorted Array")
+print(data)
+size = len(data)
+quickSort(data, 0, size - 1)
+print('Sorted Array in Ascending Order:')
+print(data)
