@@ -232,8 +232,8 @@ public partial class Block : Node2D
                 if (input is null) continue;
                 if (shape.line.ContainsBreakers()) continue;
                 positions.Add(output.GlobalPosition);
-                positions.Add(new Vector2(output.GlobalPosition.X, input.GlobalPosition.Y));
-                positions.Add(new Vector2(output.GlobalPosition.X, input.GlobalPosition.Y));
+                positions.Add(new Vector2(input.GlobalPosition.X, output.GlobalPosition.Y));
+                positions.Add(new Vector2(input.GlobalPosition.X, output.GlobalPosition.Y));
                 positions.Add(input.GlobalPosition);
             }
             else if (output is Block outblock)
@@ -259,7 +259,52 @@ public partial class Block : Node2D
                         positions.Add(input.GlobalPosition);
                     }
                 }
-                if (output is Else)
+                if (output is Try)
+                {
+                    if (input is null) continue;
+                    positions.Add(output.GlobalPosition);
+                    positions.Add(new Vector2(output.GlobalPosition.X, input.GlobalPosition.Y));
+                    positions.Add(new Vector2(output.GlobalPosition.X, input.GlobalPosition.Y));
+                    positions.Add(input.GlobalPosition);
+                    int j = 1;
+                    while (input is Except && i + j < Children.Count)
+                    {
+                        input = Children[i + j];
+                        j++;
+                    }
+                    foreach (var pos in outblock.Output)
+                    {
+                        positions.Add(pos);
+                        positions.Add(new Vector2(input.GlobalPosition.X, pos.Y));
+                        positions.Add(new Vector2(input.GlobalPosition.X, pos.Y));
+                        positions.Add(input.GlobalPosition);
+                    }
+                }
+                if (output is Except)
+                {
+                    if (input is null) continue;
+                    if (input is Except)
+                    {
+                        positions.Add(output.GlobalPosition);
+                        positions.Add(new Vector2(output.GlobalPosition.X, input.GlobalPosition.Y));
+                        positions.Add(new Vector2(output.GlobalPosition.X, input.GlobalPosition.Y));
+                        positions.Add(input.GlobalPosition);
+                    }
+                    int j = 1;
+                    while (input is Except || input is Else && i + j < Children.Count)
+                    {
+                        input = Children[i + j];
+                        j++;
+                    }
+                    foreach (var pos in outblock.Output)
+                    {
+                        positions.Add(pos);
+                        positions.Add(new Vector2(input.GlobalPosition.X, pos.Y));
+                        positions.Add(new Vector2(input.GlobalPosition.X, pos.Y));
+                        positions.Add(input.GlobalPosition);
+                    }
+                }
+                if (output is Else || output is Finally || output is With)
                 {
                     if (input is null) continue;
                     foreach (var pos in outblock.Output)
@@ -286,10 +331,11 @@ public partial class Block : Node2D
                     }
                     if (input is null) continue;
                     positions.Add(output.GlobalPosition);
-                    positions.Add(new Vector2(output.GlobalPosition.X, input.GlobalPosition.Y));
-                    positions.Add(new Vector2(output.GlobalPosition.X, input.GlobalPosition.Y));
+                    positions.Add(new Vector2(input.GlobalPosition.X, output.GlobalPosition.Y));
+                    positions.Add(new Vector2(input.GlobalPosition.X, output.GlobalPosition.Y));
                     positions.Add(input.GlobalPosition);
                 }
+                
             }
         }
         if (positions.Count < 2)

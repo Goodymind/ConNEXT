@@ -25,7 +25,8 @@ SceneHandler="*res://scene_handler.tscn"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/vsync/vsync_mode=0
-window/stretch/aspect="keep_width"
+window/stretch/mode="canvas_items"
+window/stretch/aspect="ignore"
 
 [dotnet]
 
@@ -35,6 +36,11 @@ project/assembly_name="Flowcharter"
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
+theme/default_font_generate_mipmaps=true
 
 [input]
 
@@ -58,5 +64,6 @@ ScrollDown={
 
 environment/ssao/quality=1
 environment/ssil/quality=1
+anti_aliasing/screen_space_roughness_limiter/enabled=false
 environment/defaults/default_clear_color=Color(1, 1, 1, 1)
-anti_aliasing/quality/msaa_2d=1
+anti_aliasing/quality/msaa_2d=2

@@ -25,5 +25,7 @@ public partial class NewShape : Sprite2D
     {
         Texture = GD.Load<Texture2D>($"res://shapes/images/{shape}.svg");
         GetNode<Label>("Label").Text = line.Trim();
+        GetNode<Label>("Label").TooltipText = line.Trim();
+
     }
 }
