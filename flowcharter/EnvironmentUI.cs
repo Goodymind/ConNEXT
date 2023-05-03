@@ -63,6 +63,7 @@ public partial class EnvironmentUI : Control
     }
     public void ItemListSelected(int index, Vector2 position, int mouse_index)
     {
+        if (mouse_index != (int)MouseButton.Left) return;
         if (Functions is null)
             return;
         foreach (var f in Functions)
@@ -99,9 +100,11 @@ public partial class EnvironmentUI : Control
     {
         EmitSignal(SignalName.FileSelectedSignal, path);
     }
-    public override void _Input(InputEvent @event)
+    public override void _GuiInput(InputEvent @event)
     {
         if (@event is InputEventMouseMotion mouseMotion)
             ShowUI = mouseMotion.GlobalPosition.X < 350;
+        AcceptEvent();
     }
+
 }
