@@ -4,6 +4,7 @@ using Flowcharter.flowcharter.blocks;
 namespace Flowcharter.flowcharter;
 public partial class EnvironmentUI : Control
 {
+    [Signal] public delegate void FileSelectedSignalEventHandler(string path);
     ItemList List;
     ItemList ClassList;
     List<Function> Functions;
@@ -73,5 +74,13 @@ public partial class EnvironmentUI : Control
         }
         foreach (var f in Functions)
             f.Visible = false;
+    }
+    private void SelectFile()
+    {
+        GetNode("FileSelecter").Call("select_file");
+    }
+    private void FileSelected(string path)
+    {
+        EmitSignal(SignalName.FileSelectedSignal, path);
     }
 }

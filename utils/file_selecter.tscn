@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://vynk27g8yvl4"]
+
+[ext_resource type="Script" path="res://utils/FileSelecter.gd" id="1_lxs6j"]
+
+[node name="FileSelecter" type="Node"]
+script = ExtResource("1_lxs6j")
+
+[node name="NativeFileDialog" type="NativeFileDialog" parent="."]
+title = "Open a File"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.py ; .py Python File")
+
+[connection signal="file_selected" from="NativeFileDialog" to="." method="file_selected"]

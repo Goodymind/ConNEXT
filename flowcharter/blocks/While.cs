@@ -5,8 +5,11 @@ namespace Flowcharter.flowcharter.blocks;
 public partial class While : Block
 {
     public While() => Separate = false;
-    public override void _Ready() =>
+    public override void _Ready()
+    {
         AddChild(FlowchartGenerator.shapeScene.Instantiate<NewShape>().Init(Name, Line, NewShape.Shapes.DECISION));
+        GetChild(0).GetNode<Control>("Texts").Visible = true;
+    }
     public override void Update()
     {
         RightWardUpdate();

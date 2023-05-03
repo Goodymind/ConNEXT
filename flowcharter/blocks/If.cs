@@ -12,6 +12,7 @@ public partial class If : Block
     public override void _Ready()
     {
         AddChild(FlowchartGenerator.shapeScene.Instantiate<NewShape>().Init(Name, Line, NewShape.Shapes.DECISION));
+        GetChild(0).GetNode<Control>("Texts").Visible = true;
     }
     public override void Update()
     {

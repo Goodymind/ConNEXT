@@ -9,5 +9,6 @@ public partial class TestPageOne : Node
 			GetNode<SceneHandler>("/root/SceneHandler").ChangeSceneTo("res://main.tscn");
 		GetNode<Button>("Right").Pressed += () =>
 			GetNode<SceneHandler>("/root/SceneHandler").ChangeSceneTo("res://test/test_page_two.tscn");
+		
     }
 }

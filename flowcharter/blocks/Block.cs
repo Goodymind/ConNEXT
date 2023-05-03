@@ -329,11 +329,13 @@ public partial class Block : Node2D
                         positions.Add(output.GlobalPosition + Vector2.Up * UniversalShapeHeight / 2);
                         positions.Add(output.GlobalPosition);
                     }
-                    if (input is null) continue;
-                    positions.Add(output.GlobalPosition);
-                    positions.Add(new Vector2(input.GlobalPosition.X, output.GlobalPosition.Y));
-                    positions.Add(new Vector2(input.GlobalPosition.X, output.GlobalPosition.Y));
-                    positions.Add(input.GlobalPosition);
+                    if (input is not null)
+                    {
+                        positions.Add(output.GlobalPosition);
+                        positions.Add(new Vector2(output.GlobalPosition.X, input.GlobalPosition.Y));
+                        positions.Add(new Vector2(output.GlobalPosition.X, input.GlobalPosition.Y));
+                        positions.Add(input.GlobalPosition);
+                    }
                 }
                 
             }

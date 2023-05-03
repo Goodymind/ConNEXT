@@ -27,12 +27,11 @@ public partial class FlowchartGenerator : Node2D
     public override void _Ready()
     {
         UI = GetNode<EnvironmentUI>("CanvasLayer/Control");
-        Start();
     }
-    private void Start()
+    private void Start(string path)
     {
-        Read(@"flowcharter\test.py");
-        MostRecentParent = new Function().Init(0, "START OF THE CODE");
+        Read(path);
+        MostRecentParent = new Function().Init(0, "__START__");
         Functions.Add(MostRecentParent as Function);
         AddChild(MostRecentParent);
         string line = "";
@@ -128,5 +127,9 @@ public partial class FlowchartGenerator : Node2D
             f.Update();
         foreach (var c in Classes)
             c.Update();
+    }
+    private void FileSelected(string path)
+    {
+        Start(path);
     }
 }
