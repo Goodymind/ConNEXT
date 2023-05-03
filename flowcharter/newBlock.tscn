@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://can7ni88v6ssl"]
-
-[ext_resource type="Script" path="res://flowcharter/NewBlock.cs" id="1_e5x2p"]
-
-[node name="NewBlock" type="Node2D"]
-script = ExtResource("1_e5x2p")

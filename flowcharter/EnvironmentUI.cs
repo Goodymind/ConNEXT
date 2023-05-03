@@ -9,10 +9,26 @@ public partial class EnvironmentUI : Control
     ItemList ClassList;
     List<Function> Functions;
     List<Class> Classes;
+    Vector2 previousMousePos = Vector2.Zero;
+    AnimationPlayer animPlayer;
+    bool show;
+    bool ShowUI
+    {
+        get {return show;}
+        set 
+        {
+            if (value != show)
+            {
+                animPlayer.Play(value ? "slide_in": "slide_out");
+                show = value;
+            }
+        }
+    }
     public override void _Ready()
     {
         List = GetNode<ItemList>("VBoxContainer/ItemList");
         ClassList = GetNode<ItemList>("VBoxContainer/ClassList");
+        animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
     }
     /*
     public void Update(List<NewBlock> function)
@@ -82,5 +98,10 @@ public partial class EnvironmentUI : Control
     private void FileSelected(string path)
     {
         EmitSignal(SignalName.FileSelectedSignal, path);
+    }
+    public override void _Input(InputEvent @event)
+    {
+        if (@event is InputEventMouseMotion mouseMotion)
+            ShowUI = mouseMotion.GlobalPosition.X < 350;
     }
 }

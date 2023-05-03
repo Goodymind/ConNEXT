@@ -30,6 +30,7 @@ public partial class FlowchartGenerator : Node2D
     }
     private void Start(string path)
     {
+        GetNode<Camera2D>("Camera2D").Position = Vector2.Zero;
         Read(path);
         MostRecentParent = new Function().Init(0, "__START__");
         Functions.Add(MostRecentParent as Function);
