@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bgeu7ls0dl538"]
+[gd_scene load_steps=15 format=3 uid="uid://bgeu7ls0dl538"]
 
 [ext_resource type="FontFile" uid="uid://b2enrf6dr31fh" path="res://assets/font/seguisb.ttf" id="1_dlcwm"]
 [ext_resource type="Script" path="res://flowcharter/EnvironmentUI.cs" id="2_n3mi1"]
@@ -36,6 +36,9 @@ corner_detail = 1
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2vpby"]
 bg_color = Color(0.168627, 0.168627, 0.168627, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upxgt"]
+bg_color = Color(0.168627, 0.168627, 0.168627, 1)
+
 [sub_resource type="Theme" id="Theme_758em"]
 default_font = ExtResource("1_dlcwm")
 default_font_size = 12
@@ -50,6 +53,9 @@ ItemList/styles/panel = SubResource("StyleBoxFlat_l36ie")
 ItemList/styles/selected = SubResource("StyleBoxFlat_l36ie")
 ItemList/styles/selected_focus = SubResource("StyleBoxFlat_l36ie")
 Label/styles/normal = SubResource("StyleBoxFlat_2vpby")
+TooltipLabel/colors/font_color = Color(1, 1, 1, 1)
+TooltipLabel/fonts/font = ExtResource("1_dlcwm")
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_upxgt")
 VBoxContainer/constants/separation = 1
 
 [sub_resource type="Animation" id="Animation_wgpau"]
