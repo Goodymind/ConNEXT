@@ -12,7 +12,6 @@ namespace Flowcharter.shapes.arrow
             {
                 tailLengthModifier = value;
                 TailLengthModified(value);
-                GD.Print("Modified");
             }
         }
         Rect2 tailRect = new Rect2();

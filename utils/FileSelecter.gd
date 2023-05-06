@@ -9,5 +9,4 @@ func select_file():
 
 func file_selected(path):
         file_selected_signal.emit(path);
-        print(path)
         
