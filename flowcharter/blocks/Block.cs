@@ -6,7 +6,6 @@ using Flowcharter.shapes;
 namespace Flowcharter.flowcharter.blocks;
 public partial class Block : Node2D
 {
-    public static PackedScene lineScene = GD.Load<PackedScene>("res://flowcharter/line_drawer.tscn");
     public List<Vector2> Output
     {
         get

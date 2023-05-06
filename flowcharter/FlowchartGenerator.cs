@@ -26,11 +26,11 @@ public partial class FlowchartGenerator : Node2D
     EnvironmentUI UI;
     public override void _Ready()
     {
-        UI = GetNode<EnvironmentUI>("CanvasLayer/Control");
+        UI = GetNode<EnvironmentUI>("%Control");
     }
     private void Start(string path)
     {
-        GetNode<Camera2D>("Camera2D").Position = Vector2.Zero;
+        GetNode<Camera2D>("Camera2D").GlobalPosition = Vector2.Zero;
         Read(path);
         MostRecentParent = new Function().Init(0, "__START__");
         Functions.Add(MostRecentParent as Function);
@@ -132,5 +132,9 @@ public partial class FlowchartGenerator : Node2D
     private void FileSelected(string path)
     {
         Start(path);
+    }
+    private void ItemSelected()
+    {
+        GetNode<Camera2D>("Camera2D").GlobalPosition = Vector2.Zero;
     }
 }

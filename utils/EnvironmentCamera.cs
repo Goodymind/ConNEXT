@@ -10,16 +10,6 @@ public partial class EnvironmentCamera : Camera2D
     Vector2 targetZoom = Vector2.One;
     public override void _UnhandledInput(InputEvent @event)
     {
-        if (@event is InputEventMouseButton eventMouseButton)
-        {
-            drag = !drag;
-            previousMousePosition = eventMouseButton.Position;
-            initialPosition = Position;
-        }
-        else if (@event is InputEventMouseMotion eventMouseMotion && drag)
-        {
-            Position = (initialPosition + previousMousePosition/Zoom - eventMouseMotion.Position/Zoom);
-        }
         if (@event.IsActionReleased("ScrollUp"))
         {
             targetZoom *= 1.10f;
@@ -27,6 +17,18 @@ public partial class EnvironmentCamera : Camera2D
         else if (@event.IsActionReleased("ScrollDown"))
         {
             targetZoom *= 0.90f;
+        }
+        if (@event is InputEventMouseButton eventMouseButton)
+        {
+            if (eventMouseButton.ButtonIndex != MouseButton.Left)
+                return;
+            drag = eventMouseButton.Pressed;
+            previousMousePosition = eventMouseButton.Position;
+            initialPosition = Position;
+        }
+        else if (@event is InputEventMouseMotion eventMouseMotion && drag)
+        {
+            Position = (initialPosition + previousMousePosition/Zoom - eventMouseMotion.Position/Zoom);
         }
     }
     public override void _Process(double delta)

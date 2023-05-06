@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://mvlfdalvknuq"]
+[gd_scene load_steps=10 format=3 uid="uid://mvlfdalvknuq"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_bvngn"]
 [ext_resource type="FontFile" uid="uid://b2enrf6dr31fh" path="res://assets/font/seguisb.ttf" id="2_cmcwd"]
-[ext_resource type="FontFile" uid="uid://ch75idprlwjlr" path="res://assets/font/segoeuib.ttf" id="3_3emf6"]
+[ext_resource type="Texture2D" uid="uid://ctc5kktokssb1" path="res://assets/images/menu_background.png" id="3_0aojm"]
+[ext_resource type="Texture2D" uid="uid://bnonjkgsxqxl0" path="res://assets/images/title.svg" id="4_68y7h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cv5ky"]
 bg_color = Color(0.0980392, 0.509804, 0.768627, 1)
@@ -16,6 +17,129 @@ default_font = ExtResource("2_cmcwd")
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/styles/normal = SubResource("StyleBoxFlat_cv5ky")
 Label/colors/font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_mjrdq"]
+resource_name = "intro"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/UI/Title:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(0.5, 1, 2, 1),
+"update": 0,
+"values": [Vector2(73, 300), Vector2(73, 150), Vector2(73, 140), Vector2(-700, 140)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/UI/Title:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(2, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/UI/TextureRect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(0.5, 1, 2, 1),
+"update": 0,
+"values": [Vector2(800, -220), Vector2(630, -220), Vector2(620, -220), Vector2(1500, -220)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/UI/TextureRect:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(2, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"LoadEnvironment"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_tnjap"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/UI/Title:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(73, 150)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/UI/Title:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/UI/TextureRect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(630, -220)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/UI/TextureRect:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t04is"]
+_data = {
+"RESET": SubResource("Animation_tnjap"),
+"intro": SubResource("Animation_mjrdq")
+}
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_bvngn")
@@ -31,63 +155,33 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_q3fi6")
 
-[node name="VSplitContainer" type="VSplitContainer" parent="CanvasLayer/UI"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UI"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 83.0
-offset_top = -90.0
-offset_right = 576.0
-offset_bottom = 113.0
-grow_vertical = 2
-dragger_visibility = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 800.0
+offset_top = -220.0
+offset_right = 243.996
+offset_bottom = 148.0
+texture = ExtResource("3_0aojm")
+stretch_mode = 4
 
-[node name="Label" type="Label" parent="CanvasLayer/UI/VSplitContainer"]
+[node name="Title" type="TextureRect" parent="CanvasLayer/UI"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_3emf6")
-theme_override_font_sizes/font_size = 89
-text = "ConNEXT"
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 73.0
+offset_top = 300.0
+offset_right = 893.0
+offset_bottom = 1080.0
+scale = Vector2(0.266982, 0.266982)
+texture = ExtResource("4_68y7h")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/VSplitContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Select" type="Button" parent="CanvasLayer/UI/VSplitContainer/VBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 6
-text = "Select a File"
-
-[node name="Help" type="Button" parent="CanvasLayer/UI/VSplitContainer/VBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 6
-text = "Help"
-
-[node name="Options" type="Button" parent="CanvasLayer/UI/VSplitContainer/VBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 6
-text = "Options"
-
-[node name="Left" type="Button" parent="."]
-visible = false
-offset_left = 204.0
-offset_top = 276.0
-offset_right = 538.0
-offset_bottom = 391.0
-theme_override_font_sizes/font_size = 78
-text = "left"
-
-[node name="Right" type="Button" parent="."]
-visible = false
-offset_left = 707.0
-offset_top = 276.0
-offset_right = 1041.0
-offset_bottom = 391.0
-theme_override_font_sizes/font_size = 78
-text = "right"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+reset_on_save = false
+libraries = {
+"": SubResource("AnimationLibrary_t04is")
+}

@@ -5,6 +5,7 @@ namespace Flowcharter.flowcharter;
 public partial class EnvironmentUI : Control
 {
     [Signal] public delegate void FileSelectedSignalEventHandler(string path);
+    [Signal] public delegate void ItemSelectedEventHandler();
     ItemList List;
     ItemList ClassList;
     List<Function> Functions;
@@ -29,6 +30,7 @@ public partial class EnvironmentUI : Control
         List = GetNode<ItemList>("VBoxContainer/ItemList");
         ClassList = GetNode<ItemList>("VBoxContainer/ClassList");
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        animPlayer.Play("slide_out");
     }
     /*
     public void Update(List<NewBlock> function)
@@ -76,6 +78,7 @@ public partial class EnvironmentUI : Control
         }
         foreach (var c in Classes)
             c.Visible = false;
+        EmitSignal(SignalName.ItemSelected);
     }
     public void ClassItemListSelected(int index, Vector2 position,int mouse_index)
     {
@@ -91,6 +94,7 @@ public partial class EnvironmentUI : Control
         }
         foreach (var f in Functions)
             f.Visible = false;
+        EmitSignal(SignalName.ItemSelected);
     }
     private void SelectFile()
     {
@@ -100,11 +104,12 @@ public partial class EnvironmentUI : Control
     {
         EmitSignal(SignalName.FileSelectedSignal, path);
     }
-    public override void _GuiInput(InputEvent @event)
+    public override void _Input(InputEvent @event)
     {
         if (@event is InputEventMouseMotion mouseMotion)
+        {
             ShowUI = mouseMotion.GlobalPosition.X < 350;
-        AcceptEvent();
+        }
     }
 
 }

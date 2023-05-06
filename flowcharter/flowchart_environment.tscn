@@ -7,9 +7,14 @@
 [node name="FlowchartEnvironment" type="Node2D"]
 script = ExtResource("1_fqhq5")
 
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(0, -24, 32, 0, 0, 24, -32, 0)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" parent="CanvasLayer" instance=ExtResource("2_4c6so")]
+unique_name_in_owner = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -21,3 +26,4 @@ script = ExtResource("2_lf5d3")
 [node name="Classes" type="Node2D" parent="."]
 
 [connection signal="FileSelectedSignal" from="CanvasLayer/Control" to="." method="FileSelected"]
+[connection signal="ItemSelected" from="CanvasLayer/Control" to="." method="ItemSelected"]
