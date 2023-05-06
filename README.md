@@ -1,6 +1,6 @@
 # ConNEXT
 ## an automatic flowchart generator for python codes
->It basically creates flowcharts, that's it.>
+>It basically creates flowcharts, that's it.
 
 A research product of students from Valenzuela City School of Mathematics and Science.
 
