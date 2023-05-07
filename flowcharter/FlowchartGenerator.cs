@@ -8,18 +8,18 @@ namespace Flowcharter.flowcharter;
 public partial class FlowchartGenerator : Node2D
 {
     Block MostRecentParent;
-    public static PackedScene shapeScene = GD.Load<PackedScene>("res://shapes/shape.tscn");
-    static PackedScene functionScene = GD.Load<PackedScene>("res://flowcharter/blocks/function.tscn");
-    static PackedScene ifScene = GD.Load<PackedScene>("res://flowcharter/blocks/if.tscn");
-    static PackedScene elseScene = GD.Load<PackedScene>("res://flowcharter/blocks/else.tscn");
-    static PackedScene elifScene = GD.Load<PackedScene>("res://flowcharter/blocks/elif.tscn");
-    static PackedScene whileScene = GD.Load<PackedScene>("res://flowcharter/blocks/while.tscn");
-    static PackedScene forScene = GD.Load<PackedScene>("res://flowcharter/blocks/for.tscn");
-    static PackedScene classScene = GD.Load<PackedScene>("res://flowcharter/blocks/class.tscn");
-    static PackedScene withScene = GD.Load<PackedScene>("res://flowcharter/blocks/with.tscn");
-    static PackedScene tryScene = GD.Load<PackedScene>("res://flowcharter/blocks/try.tscn");
-    static PackedScene exceptScene = GD.Load<PackedScene>("res://flowcharter/blocks/except.tscn");
-    static PackedScene finallyScene = GD.Load<PackedScene>("res://flowcharter/blocks/finally.tscn");
+    public readonly static PackedScene shapeScene = GD.Load<PackedScene>("res://shapes/shape.tscn");
+    readonly static PackedScene functionScene = GD.Load<PackedScene>("res://flowcharter/blocks/function.tscn");
+    readonly static PackedScene ifScene = GD.Load<PackedScene>("res://flowcharter/blocks/if.tscn");
+    readonly static PackedScene elseScene = GD.Load<PackedScene>("res://flowcharter/blocks/else.tscn");
+    readonly static PackedScene elifScene = GD.Load<PackedScene>("res://flowcharter/blocks/elif.tscn");
+    readonly static PackedScene whileScene = GD.Load<PackedScene>("res://flowcharter/blocks/while.tscn");
+    readonly static PackedScene forScene = GD.Load<PackedScene>("res://flowcharter/blocks/for.tscn");
+    readonly static PackedScene classScene = GD.Load<PackedScene>("res://flowcharter/blocks/class.tscn");
+    readonly static PackedScene withScene = GD.Load<PackedScene>("res://flowcharter/blocks/with.tscn");
+    readonly static PackedScene tryScene = GD.Load<PackedScene>("res://flowcharter/blocks/try.tscn");
+    readonly static PackedScene exceptScene = GD.Load<PackedScene>("res://flowcharter/blocks/except.tscn");
+    readonly static PackedScene finallyScene = GD.Load<PackedScene>("res://flowcharter/blocks/finally.tscn");
     List<string> FileLines;
     List<Function> Functions = new List<Function>();
     List<Class> Classes = new List<Class>();
@@ -131,6 +131,19 @@ public partial class FlowchartGenerator : Node2D
     }
     private void FileSelected(string path)
     {
+        Functions = new List<Function>();
+        Classes = new List<Class>();
+        foreach (var f in GetNode("Functions").GetChildren())
+        {
+            GetNode("Functions").RemoveChild(f);
+            f.Free();
+        }
+        foreach(var c in GetNode("Classes").GetChildren())
+        {
+            GetNode("Classes").RemoveChild(c);
+            c.Free();
+        }
+
         Start(path);
     }
     private void ItemSelected()

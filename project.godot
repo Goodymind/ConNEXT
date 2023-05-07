@@ -10,9 +10,9 @@ config_version=5
 
 [application]
 
-config/name="Flowcharter"
+config/name="ConNEXT"
 run/main_scene="res://main.tscn"
-config/features=PackedStringArray("4.0", "C#", "Forward Plus")
+config/features=PackedStringArray("4.0", "Forward Plus")
 run/low_processor_mode=true
 boot_splash/bg_color=Color(1, 1, 1, 1)
 boot_splash/image="res://assets/images/loading.png"
@@ -40,6 +40,10 @@ project/assembly_name="Flowcharter"
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/native_dialogs/plugin.cfg")
 
 [gui]
 
