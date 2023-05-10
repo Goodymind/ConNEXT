@@ -14,7 +14,7 @@ Press the "Select File" button in the menu, a file dialog box should appear
 ![image](https://github.com/Goodymind/ConNEXT/assets/105787755/89085081-098c-4066-a0c1-d66a16e7a99f)
 
 Select your python file. It may lag a bit, but a flowchart will be generated. Use your left mouse button to drag and see more of the flowchart and the scroll wheel to zoom in/out.
-The functions and classes of the file should be in the menu.
+<b><i> The functions and classes of the file should be in the menu. You can select them and they will show their corresponding flowchart
 
 ## Download
 ### [ConNEXT v.1.0.0](https://github.com/Goodymind/ConNEXT/releases/tag/v1.0.0)
