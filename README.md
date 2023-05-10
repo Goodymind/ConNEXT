@@ -21,20 +21,19 @@ Select your python file. It may lag a bit, but a flowchart will be generated. Us
 
 ## Known Issues
 
-Multiline comments add extra shapes and may break the flowchart
-code such as
+1. Multiline comments add extra shapes and may break the flowchart
 
-<code>
+2. Code such as
+```
 if(x==1):
     ... 
-</code>
-
+```
 break flowcharts, it is adviced to use
 
-<code>
+```
 if x == 1:
     ...
-</code>
+```
 
 instead.
 
