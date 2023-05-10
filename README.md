@@ -14,7 +14,7 @@ Press the "Select File" button in the menu, a file dialog box should appear
 ![image](https://github.com/Goodymind/ConNEXT/assets/105787755/89085081-098c-4066-a0c1-d66a16e7a99f)
 
 Select your python file. It may lag a bit, but a flowchart will be generated. Use your left mouse button to drag and see more of the flowchart and the scroll wheel to zoom in/out.
-<b><i> The functions and classes of the file should be in the menu. You can select them and they will show their corresponding flowchart
+<b><i> The functions and classes of the file should be in the menu. You can select them and they will show their corresponding flowchart </b></i>
 
 ## Download
 ### [ConNEXT v.1.0.0](https://github.com/Goodymind/ConNEXT/releases/tag/v1.0.0)
@@ -22,4 +22,19 @@ Select your python file. It may lag a bit, but a flowchart will be generated. Us
 ## Known Issues
 
 Multiline comments add extra shapes and may break the flowchart
+code such as
+
+<code>
+if(x==1):
+    ... 
+</code>
+
+break flowcharts, it is adviced to use
+
+<code>
+if x == 1:
+    ...
+</code>
+
+instead.
 
